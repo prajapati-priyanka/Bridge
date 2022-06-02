@@ -1,6 +1,6 @@
 import "./App.css";
 import { Login, Signup } from "./components";
-import {Home, Landing} from "./pages";
+import {Bookmark, Home, Landing, UserProfile} from "./pages";
 
 
 function App() {
@@ -10,6 +10,8 @@ function App() {
       {/* <Login /> */}
       {/* <Signup /> */}
       <Home />
+      <UserProfile />
+    <Bookmark />
     </div>
   );
 }
