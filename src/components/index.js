@@ -6,4 +6,5 @@ export {CommentInput} from "./CommentInput";
 export {CommentCard} from "./CommentCard";
 export {SuggestedUsersSidebar} from "./SuggestedUsersSidebar";
 export {CreatePostModal} from "./CreatePostModal";
-export {Header} from "./Header"
+export {Header} from "./Header";
+export {UserProfileCard} from "./UserProfileCard"
