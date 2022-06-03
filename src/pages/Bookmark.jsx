@@ -1,10 +1,10 @@
-import { Box, Flex, useDisclosure, Heading } from "@chakra-ui/react";
+import { Box, Flex, useDisclosure} from "@chakra-ui/react";
 import {
     Header,
     PostCard,
     SideNav,
     SuggestedUsersSidebar,
-    UserProfileCard,
+ 
   } from "../components"
 
 const Bookmark = ()=>{
