@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Heading, IconButton, Text,Link } from "@chakra-ui/react";
 import {AiOutlineLogout} from "react-icons/ai";
 
 const UserProfileCard = () => {
@@ -28,7 +28,7 @@ const UserProfileCard = () => {
           </IconButton>
       </Flex>
       <Text>Bridge is built with Love.</Text>
-      <Button variant="link" color="blue.400">www.google.com</Button>
+      <Link fontWeight="400" color="blue.500">www.google.com</Link>
 
       <Flex gap="4" bg="brand.100" w="fit-content" p="4" borderRadius="8" mt="4">
         <Box cursor="pointer">
