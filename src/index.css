@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Kannada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+*{
+    --primary-color: #F6A832;
+    --secondary-color:#743c7a;
+    --primary-hover-color:#FFCD38;
+    --bg-color :#f2efeb;
+    --border-color:#35312b;
+    --sideNav-hover-color:#e6ddd2;
+    --font-color:#323130;
+    --font-color-2:#9197a3;
+    --card-color: #fff;
+    --success-color:#166534;
+    --error-color:#b91c1c;
+    --notification-color:#f87171;
+    --auth-page-color:#6746E2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+
+}
