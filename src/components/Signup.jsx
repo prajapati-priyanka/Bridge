@@ -1,26 +1,28 @@
 import {
-    Box,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    InputGroup,
-    InputRightElement,
-    Button,
-    Text,
-  } from "@chakra-ui/react";
-  import React, { useState } from "react";
+  Box,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  Text,
+  Link
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Signup = ()=>{
+const Signup = () => {
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const handlePasswordClick = () => setShow(!show);
 
-    const [show, setShow] = useState(false);
-    const handlePasswordClick = () => setShow(!show);
-
-    return(
-        <Box
-      w={{base:"90%", md:"60%", lg:"35%"}}
+  return (
+    <Box
+      w={{ base: "90%", md: "60%", lg: "35%" }}
       p={[1, 6]}
-      mt={{base:"10", md:"10vh"}}
+      mt={{ base: "10", md: "10vh" }}
       mx="auto"
       border={["none", "1px"]}
       borderColor={["", "var(--border-color)"]}
@@ -29,11 +31,11 @@ const Signup = ()=>{
       <Heading
         as="h4"
         size="xl"
-        color="var(--secondary-color)"
+        color="brandSecondary.500"
         mb="6"
         textAlign="center"
       >
-        Signup  
+        Signup
       </Heading>
 
       <FormControl mb="3.5" isRequired>
@@ -74,7 +76,12 @@ const Signup = ()=>{
             variant="filled"
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handlePasswordClick}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              variant="ghost"
+              onClick={handlePasswordClick}
+            >
               {show ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
@@ -91,32 +98,34 @@ const Signup = ()=>{
             variant="filled"
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handlePasswordClick}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              variant="ghost"
+              onClick={handlePasswordClick}
+            >
               {show ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
 
-    
-      <Button
-        variant="solid"
-        display="block"
-        w="100%"
-        mb="4"
-        bgColor="var(--primary-color)"
-        _hover={{ bg: "var(--primary-hover-color)" }}
-      >
+      <Button variant="solid" display="block" w="100%" mb="4">
         Signup
       </Button>
 
       <Text textAlign="center">
         Already have an account?
-        <Button variant="link"  ml={["", 1]} color="var(--secondary-color)">
+        <Link
+    
+          ml={["", 1]}
+          fontWeight="500"
+          onClick={() => navigate("/login")}
+        >
           Login
-        </Button>
+        </Link>
       </Text>
     </Box>
-    )
-}
-export{Signup}
+  );
+};
+export { Signup };
