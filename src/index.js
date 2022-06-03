@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./theme";
+import { BrowserRouter } from "react-router-dom";
 
 // Call make Server
 makeServer();
@@ -12,7 +13,9 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider resetCSS={true} theme={theme}>
-    <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
