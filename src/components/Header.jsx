@@ -1,12 +1,13 @@
 import {Flex, Heading, Input, Button} from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
+import { AiOutlinePlusSquare } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({onOpen})=>{
+  const navigate = useNavigate()
     return(
         <Flex
         bg="white"
         w="100%"
-        // my="4"
         gap="10"
         justifyContent="space-between"
         position="fixed"
@@ -15,7 +16,7 @@ const Header = ({onOpen})=>{
         pl="6" pr="6"
         zIndex="3"
       >
-        <Heading as="h2" size="xl" fontFamily="Tiro Kannada">
+        <Heading as="h2" size="xl" fontFamily="Tiro Kannada" cursor="pointer" onClick={()=>navigate("/")}>
           Bridge
         </Heading>
 
@@ -29,7 +30,7 @@ const Header = ({onOpen})=>{
           p="2"
           paddingLeft="4"
         />
-        <Button leftIcon={<EmailIcon />} variant="solid" onClick={onOpen}>
+        <Button leftIcon={<AiOutlinePlusSquare />} variant="solid" onClick={onOpen}>
           Create Post
         </Button>
       </Flex>
