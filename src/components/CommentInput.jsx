@@ -1,4 +1,5 @@
-import { Avatar, Button, Flex, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Avatar, Flex, Input, InputGroup, InputRightElement,IconButton } from "@chakra-ui/react";
+import {AiOutlineSend} from "react-icons/ai";
 
 
 const CommentInput = ()=>{
@@ -26,17 +27,27 @@ const CommentInput = ()=>{
                }}
              />
              <InputRightElement mr="2">
-                 <Button
-                    variant ="ghost"
-                    _hover ={{
-                        bgColor: "transparent"
-                    }}
-                    cursor="pointer"
-                >
-                    POST
+             <IconButton
+        
+             bgColor="transparent"
+            borderRadius="50%"
+             fontSize = "xl"
+             icon = {<AiOutlineSend />}
+             _hover={{
+                bgColor:"gray.200",
+               
+             }}
+             _focus={{
+                bgColor:"gray.100",
+              
+             }}
+             _active={{
+                bgColor:"gray.100",
+                
+             }}
+          >
 
-
-                 </Button>
+          </IconButton>
              
              </InputRightElement>
              </InputGroup>
