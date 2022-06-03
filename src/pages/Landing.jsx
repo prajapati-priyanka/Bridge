@@ -3,12 +3,14 @@ import {
   Flex,
   Heading,
   Button,
-  Link,
   Text,
   Image,
+  Link,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const navigate = useNavigate();
   return (
     <Flex
       bgColor="var(--bg-color)"
@@ -25,16 +27,21 @@ const Landing = () => {
         <Text fontFamily="Satisfy" fontSize="2xl">
           Fill the gap by connecting with your loved ones..!!
         </Text>
-        <Button
-          // bgColor="yellow.400"
-          variant="solid"
-          colorScheme="yellow"
-          width="30%"
-          // _hover={{ bg: "var(--primary-hover-color)" }}
-        >
-          SignUp
-        </Button>
-        <Button variant="link" colorScheme="yellow" width="48%">Already have an account?</Button>
+        <Flex gap="3">
+          <Button
+            variant="outline"
+            width="30%"
+            onClick={() => navigate("/signup")}
+          >
+            SignUp
+          </Button>
+          <Button variant="solid" width="30%" onClick={() => navigate("/home")}>
+            Get Started
+          </Button>
+        </Flex>
+        <Link width="48%" fontWeight="500" onClick={() => navigate("/login")}>
+          Already have an account?
+        </Link>
       </Box>
       <Box w={{ md: "30%", sm: "70%" }}>
         <Image src="./assets/landingImage.svg" alt="landing" w="100%" />
