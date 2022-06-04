@@ -9,27 +9,26 @@ import {
   Button,
   Text,
   Link,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/asyncThunks/authThunk";
-import {useDispatch, useSelector} from "react-redux"
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { ImSpinner3 } from "react-icons/im";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
- const toast = useToast();
+  const toast = useToast();
 
   const [newUser, setNewUser] = useState({
     username: "",
     password: "",
   });
   const [show, setShow] = useState(false);
-  const {isLoading} = useSelector(state=> state.auth)
+  const { isLoading } = useSelector((state) => state.auth);
 
   const handlePasswordClick = () => setShow(!show);
 
@@ -38,41 +37,43 @@ const Login = () => {
     password: "pihu7845",
   };
 
-  const onChangeHandler = (e)=>{
-    const {name, value} = e.target;
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
 
-    setNewUser((prevUser => ({...prevUser, [name]:value})))
-}
-  
-  const guestLoginHandler = (e)=>{
-      e.preventDefault()
-      setNewUser(guestUser)
-  }
+    setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
 
-  const checkInputs = () =>{
+  const guestLoginHandler = (e) => {
+    e.preventDefault();
+    setNewUser(guestUser);
+  };
+
+  const checkInputs = () => {
     return newUser.username && newUser.password;
-  }
+  };
 
-  const loginHandler = async (e)=>{
-    if(checkInputs()){
+  const loginHandler = async (e) => {
+    if (checkInputs()) {
       e.preventDefault();
-       const response = await dispatch(loginUser(newUser));
-      if(response?.payload?.status===200){
+      const response = await dispatch(loginUser(newUser));
+      if (response?.payload?.status === 200) {
         localStorage.setItem("token", response.payload.data.encodedToken);
-        localStorage.setItem("user", JSON.stringify(response.payload.data.foundUser));
-      
+        localStorage.setItem(
+          "user",
+          JSON.stringify(response.payload.data.foundUser)
+        );
       }
-   
-      navigate(location?.state?.from?.pathname || "/home",{
-        replace:true,
+
+      navigate(location?.state?.from?.pathname || "/home", {
+        replace: true,
       });
       toast({
         description: "Successfully Logged In",
         status: "success",
         duration: 2000,
-        isClosable: true
-      })
-    }else{
+        isClosable: true,
+      });
+    } else {
       toast({
         description: "Enter both the fields",
         status: "warning",
@@ -80,10 +81,7 @@ const Login = () => {
         isClosable: true,
       });
     }
-   
-  }
-  
-  
+  };
 
   return (
     <Box
@@ -114,21 +112,21 @@ const Login = () => {
           placeholder="Enter username"
           name="username"
           value={newUser.username}
-          onChange = {(e)=>onChangeHandler(e)}
+          onChange={(e) => onChangeHandler(e)}
         />
       </FormControl>
       <FormControl mb="3.5">
         <FormLabel>Password:</FormLabel>
         <InputGroup size="md">
           <Input
-           rounded="none"
-           variant="filled"
+            rounded="none"
+            variant="filled"
             pr="4.5rem"
             type={show ? "text" : "password"}
             placeholder="Enter password"
             name="password"
             value={newUser.password}
-            onChange = {(e)=>onChangeHandler(e)}
+            onChange={(e) => onChangeHandler(e)}
           />
           <InputRightElement width="4.5rem">
             <Button
@@ -143,10 +141,27 @@ const Login = () => {
         </InputGroup>
       </FormControl>
 
-      <Button variant="outline" display="block" w="100%" mt="8" mb="4" onClick={guestLoginHandler}>
+      <Button
+        variant="outline"
+        display="block"
+        w="100%"
+        mt="8"
+        mb="4"
+        onClick={guestLoginHandler}
+      >
         Enter Guest Credentials
       </Button>
-      <Button variant="solid" display="block" w="100%" mb="4" onClick={loginHandler} isLoading={isLoading} loadingText="Logging In" spinnerPlacement="center">
+      <Button
+        variant="solid"
+        display="block"
+        w="100%"
+        mb="4"
+        onClick={loginHandler}
+        isLoading={isLoading}
+        loadingText="Logging In"
+        spinnerPlacement="start"
+        spinner={<ImSpinner3 size={20} color="white" />}
+      >
         Login
       </Button>
 
