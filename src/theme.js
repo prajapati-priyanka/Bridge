@@ -1,7 +1,5 @@
 import {
   extendTheme,
-  theme as base,
-  withDefaultColorScheme,
 } from "@chakra-ui/react";
 
 const breakpoints = {
@@ -111,7 +109,4 @@ export const theme = extendTheme(
       },
     },
   },
-  withDefaultColorScheme({
-    colorScheme: "brand",
-  })
 );
