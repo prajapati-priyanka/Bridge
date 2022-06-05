@@ -27,16 +27,19 @@ const Landing = () => {
         <Text fontFamily="Satisfy" fontSize="2xl">
           Fill the gap by connecting with your loved ones..!!
         </Text>
-
-        <Button
-          variant="solid"
-          width={{base:"50%", md:"30%"}}
-          onClick={() => navigate("/signup")}
-        >
-          SignUp
-        </Button>
-
-        <Link width={{base:"100%", md:"50%"}} fontWeight="500" onClick={() => navigate("/login")}>
+        <Flex gap="3">
+          <Button
+            variant="outline"
+            width={{base:"50%", md: "30%"}}
+            onClick={() => navigate("/signup")}
+          >
+            SignUp
+          </Button>
+          <Button variant="solid" width={{base:"50%", md: "30%"}} onClick={() => navigate("/home")}>
+            Get Started
+          </Button>
+        </Flex>
+        <Link width={{base:"100%", md: "50%"}}  fontWeight="500" onClick={() => navigate("/login")}>
           Already have an account?
         </Link>
       </Box>
