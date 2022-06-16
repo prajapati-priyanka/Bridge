@@ -30,16 +30,16 @@ const Landing = () => {
         <Flex gap="3">
           <Button
             variant="outline"
-            width="30%"
+            width={{base:"50%", md: "30%"}}
             onClick={() => navigate("/signup")}
           >
             SignUp
           </Button>
-          <Button variant="solid" width="30%" onClick={() => navigate("/home")}>
+          <Button variant="solid" width={{base:"50%", md: "30%"}} onClick={() => navigate("/home")}>
             Get Started
           </Button>
         </Flex>
-        <Link width="48%" fontWeight="500" onClick={() => navigate("/login")}>
+        <Link width={{base:"100%", md: "50%"}}  fontWeight="500" onClick={() => navigate("/login")}>
           Already have an account?
         </Link>
       </Box>
