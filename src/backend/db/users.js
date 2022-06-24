@@ -9,76 +9,274 @@ import { formatDate } from "../utils/authUtils";
 
 export const users = [
   {
-    _id: uuid(),
+    _id: "4ed82781",
     firstName: "Priyanka",
     lastName: "Prajapati",
     username: "pihu909",
     password: "pihu7845",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    bio:"advance-frontend-developer",
+    bio:"Advanced-frontend-developer",
     website:"priyanka-prajapati.netlify.app/",
-    profileURL:"https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZSUyMGltYWdlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+    avatarUrl:"",
+    bookmarks: [],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Ankit",
+        lastName: "Agarwal",
+        username: "ankit123",
+        avatarUrl: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Sakshi",
+        lastName: "Kakkar",
+        username: "sakshi909",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722184/third_mrjqm3.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Pooja",
+        lastName: "Singh",
+        username: "poojasingh",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Ankit",
+        lastName: "Agarwal",
+        username: "ankit123",
+        avatarUrl: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Praveen",
+        lastName: "Malviya",
+        username: "pravy69",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+      },
+    ],
   },
+
+  // ******************2nd User********************
   {
-    _id: uuid(),
-    firstName: "Agarwalla",
-    lastName: "Ankit",
+    _id: "64e9b0e7",
+    firstName: "Ankit",
+    lastName: "Agarwal",
     username: "ankit123",
-    password: "ankit123",
+    password: "kit123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio:"Aspiring web developer",
-    website:"ankit.netlify.app",
-    profileURL:"https://ik.imagekit.io/qrhnvir8bf0/1640269829878_G2PxQ9-Ra.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1652437792754"
+    website:"https://www.google.com/",
+    avatarUrl:"",
+    bookmarks:[],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Priyanka",
+        lastName: "Prajapati",
+        username: "pihu909",
+        avatarUrl: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Sakshi",
+        lastName: "Kakkar",
+        username: "sakshi909",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722184/third_mrjqm3.jpg",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Priyanka",
+        lastName: "Prajapati",
+        username: "pihu909",
+        avatarUrl: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Priya",
+        lastName: "Yadav",
+        username: "preet15",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+      },
+    ],
   },
+
+  // *************3rd User**************
   {
-    _id: uuid(),
-    firstName: "John",
-    lastName: "Deo",
-    username: "john",
-    password: "john123",
+    _id: "5e24f83a",
+    firstName: "Sakshi",
+    lastName: "Kakkar",
+    username: "sakshi909",
+    password: "uandrk90",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    bio:"",
-    website:"johndeo.netlify.app",
-    profileURL:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZSUyMGltYWdlcyUyMG1lbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+    bio:"I am third user",
+    website:"https://www.google.com/",
+    avatarUrl:"",
+    bookmarks:[],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Priyanka",
+        lastName: "Prajapati",
+        username: "pihu909",
+        avatarUrl: "",
+      },
+    ],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Priyanka",
+        lastName: "Prajapati",
+        username: "pihu909",
+        avatarUrl: "",
+      },
+      {
+        id: uuid(),
+        firstName: "Priya",
+        lastName: "Yadav",
+        username: "preet15",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+    
+      },
+    ],
   },
+
+  // *************4th User**********************
   {
-    _id: uuid(),
-    firstName: "Ajay",
-    lastName: "Malik",
-    username: "ajay",
-    password: "ajay123",
+    _id: "8975eb7e",
+    firstName: "Priya",
+    lastName: "Yadav",
+    username: "preet15",
+    password: "preet1592",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    bio:"software engineer at TCS",
-    website:"",
-    profileURL:"https://images.unsplash.com/photo-1610024062303-e355e94c7a8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXMlMjBtZW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+    bio:"I am fourth user",
+    website:"https://www.google.com/",
+    avatarUrl:"",
+    bookmarks:[],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Praveen",
+        lastName: "Malviya",
+        username: "pravy69",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Ankit",
+        lastName: "Agarwal",
+        username: "ankit123",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+      },
+    ],
+    
   },
+
+  // **********5th User************
   {
-    _id: uuid(),
-    firstName: "Maya",
-    lastName: "Soni",
-    username: "mayasoni",
-    password: "mayasoni123",
+    _id: "5dc02a81",
+    firstName: "Praveen",
+    lastName: "Malviya",
+    username: "pravy69",
+    password: "gandhi@56",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    bio:"student",
-    website:"",
-    profileURL:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+    bio:"I am fifth user",
+    website:"https://www.google.com/",
+    avatarUrl:"",
+    bookmarks:[],
+    followers: [
+      {
+        id: uuid(),
+        firstName: "Priya",
+        lastName: "Yadav",
+        username: "preet15",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+      },
+    ],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Pooja",
+        lastName: "Singh",
+        username: "poojasingh",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+      },
+    ],
   },
+
+  // *************6th User**************
   {
     _id: uuid(),
-    firstName: "Bhakti",
-    lastName: "Kharatkar",
-    username: "bhakti",
-    password: "bhakti",
+    firstName: "Pooja",
+    lastName: "Singh",
+    username: "poojasingh",
+    password: "poojasingh94",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    bio:"Front-end-developer",
-    website:"bhaktikharatkar.netlify.app",
-    profileURL:"https://ik.imagekit.io/qrhnvir8bf0/bhakti_3FWSPknhE.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1652437791804"
+    bio:"I am sixth user",
+    website:"https://www.google.com/",
+    avatarUrl:"",
+    bookmarks:[],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Priyanka",
+        lastName: "Prajapati",
+        username: "pihu909",
+        avatarUrl: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ankit",
+        lastName: "Agarwal",
+        username: "ankit123",
+        avatarUrl:
+          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+      },
+    ],
+    following:[],
+  
   },
-];
+
+  // ************7th User**********
+  {
+    _id: "5d98463f",
+    firstName: "Nupur",
+    lastName: "Dey",
+    username: "deynupur",
+    password: "letsread",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    avatarUrl:
+      "https://res.cloudinary.com/check-social/image/upload/v1652722233/second_wmzgil.jpg",
+    followers: [],
+    following: [],
+    bookmarks: [],
+    bio: "I am seventh user",
+    portfolio: "https://www.google.com/",
+  },
+]
+
 
