@@ -1,7 +1,6 @@
 import {Routes, Route } from "react-router-dom";
 import "./App.css";
-import { Login, Signup } from "./components";
-import {Bookmark, Home, Landing, UserProfile} from "./pages";
+import {Bookmark, Home, Landing, UserProfile,Login, Signup } from "./pages";
 import { RequiresAuth } from "./Router/RequiresAuth";
 
 
