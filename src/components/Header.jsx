@@ -24,13 +24,13 @@ const Header = ({onOpen})=>{
           type="search"
           placeholder="Search for content or user"
           bg="var(--bg-color)"
-          w="40%"
+          w={{base:"100%", lg:"40%"}}
           variant="unstyled"
           borderRadius="20"
           p="2"
           paddingLeft="4"
         />
-        <Button leftIcon={<AiOutlinePlusSquare />} variant="solid" onClick={onOpen}>
+        <Button leftIcon={<AiOutlinePlusSquare />} variant="solid" onClick={onOpen} display={{base:"none", md: "block"}}>
           Create Post
         </Button>
       </Flex>

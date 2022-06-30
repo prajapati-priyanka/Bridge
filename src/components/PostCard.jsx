@@ -4,17 +4,18 @@ import {MdFavoriteBorder,MdOutlineBookmarkBorder} from "react-icons/md";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
  
-const PostCard = ()=>{
+const PostCard = ({post})=>{
+   
     return(
-        <Flex flexDirection="column" gap="2">
+        <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20" >
         
         {/* Avatar and name */}
          <Flex justifyContent="space-between">
             <Flex cursor="pointer" gap="2" alignItems="center">
-             <Avatar name="Priyanka Prajapati" src="./assets/landingImage.svg"/>
+             <Avatar name={post.firstName +" "+ post.lastName} src="https://unsplash.com/photos/IF9TK5Uy-KI"/>
              <Heading as="h4" size="sm">
-                 Priyanka Prajapati
-                 <Text fontSize="12px" color="gray.400">@pihu909</Text>
+                 {post.firstName} {post.lastName}
+                 <Text fontSize="12px" color="gray.400" fontWeight="400" mt="1">@{post.username}</Text>
                
                
              </Heading>
@@ -61,12 +62,12 @@ const PostCard = ()=>{
           
           {/* Post Content  */}
             <Box>
-              <Text>My Name is Nothing</Text>
+              <Text>{post.content}</Text>
             </Box>
 
             {/* Like and Bookmark */}
 
-            <Flex justifyContent="space-between" alignItem="center">
+            <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
                    <IconButton
                    icon ={<MdFavoriteBorder />}
@@ -92,7 +93,7 @@ const PostCard = ()=>{
 
                   />
 
-                  <Text>Liked by Priyanka and 1 others</Text>  
+                  <Text>{post.likes.likeCount} likes</Text>  
                 
                 </Flex>
                 <IconButton 
@@ -116,9 +117,15 @@ const PostCard = ()=>{
                    }}
                 />
             </Flex>
-              
+            {/* comment Input */}
               <CommentInput />
-              <CommentCard></CommentCard>
+            
+            {/* Comments */}
+
+            {post.comments.map(comment=>(
+                <CommentCard key={comment._id} comment = {comment} />
+            ))}
+           
 
         </Flex>
     )

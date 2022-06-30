@@ -1,13 +1,17 @@
 import { Avatar, Flex, Input, InputGroup, InputRightElement,IconButton } from "@chakra-ui/react";
 import {AiOutlineSend} from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 
 const CommentInput = ()=>{
+
+    const {user} = useSelector(state=>state.auth)
+
     return(
-         <Flex gap='2'>
+         <Flex gap='2' alignItems="center">
              <Avatar
-                name="Priyanka Prajapati"
-                src="./assets/landingImage.svg"
+                name={user.firstName + " " + user.lastName}
+                src=""
                 size="sm"
              />
              <InputGroup>

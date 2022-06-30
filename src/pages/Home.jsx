@@ -1,47 +1,66 @@
-import { Flex, useDisclosure, Box } from "@chakra-ui/react";
-
+import { Flex, useDisclosure, Box,Heading } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   SideNav,
   PostCard,
   SuggestedUsersSidebar,
   CreatePostModal,
   Header,
+  MobileNav,
 } from "../components";
+import { getAllPosts } from "../redux/asyncThunks";
+
 
 const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const {posts} = useSelector(state=> state.posts);
+  const {user} = useSelector(state=> state.auth)
+    
+
+  useEffect(()=>{
+      dispatch(getAllPosts())
+     },[dispatch]);
+
+
+     const userFeed = posts.filter(item=> item.username === user.username || user.following.some(follower=> follower.username === item.username));
+
+
   return (
     <>
       {isOpen ? <CreatePostModal isOpen={isOpen} onClose={onClose} /> : null}
       <Header onOpen={onOpen} />
-      <Flex bg="var(--bg-color)" w="100%" gap="10" h="100%" pl="6" pr="6">
+      <Flex bg="var(--bg-color)" w="100%" gap="10" minH="100vh" pl="6" pr="6">
         <SideNav />
-        <Flex flexDirection="column" gap="5" w="60%" mt="6rem">
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-          <Box maxW="45rem" bg="white" p="4" borderRadius="20">
-            <PostCard />
-          </Box>
-        </Flex>
+        {userFeed.length !==0 ? (
+          <Flex flexDirection="column" gap="5" flexGrow="1" mt="6rem" mr="2" ml="2">
+          {userFeed.map(post=> (
+       
+         <PostCard key={post._id} post = {post} />
+       
+       ))}
+      
+   </Flex>): (<Flex w="50rem" justifyContent="center" alignItems = "center">
+    <Heading as="h3" size="md" textAlign="center">No posts to display, start posting and following other users to update your feed.</Heading>
+   </Flex>)}
+        
 
         <SuggestedUsersSidebar />
       </Flex>
+      <Box
+      position="sticky"
+      bottom ="0"
+      left="0"
+      right="0"
+      h="50px"
+      bgColor="brand.100"
+      display={{base:"block", md:"none"}}
+      zIndex="2"
+      >
+        <MobileNav onOpen={onOpen} />
+
+      </Box>
     </>
   );
 };
