@@ -2,20 +2,20 @@ import { Flex, Avatar,Box,Heading,Text,Popover,PopoverTrigger, IconButton, Popov
 import {BiDotsVerticalRounded} from "react-icons/bi"
 
 
-const CommentCard = ()=>{
+const CommentCard = ({comment})=>{
     return(
-        <Flex gap="2">
+        <Flex gap="2" mt="2">
             <Avatar
-              name = "Priyanka Prajapati"
-              src="./assets/landingImage.svg"
+              name = {comment.firstName + " " + comment.lastName}
+              src=""
               size= "sm"
               cursor="pointer"
 
              />
              <Flex justifyContent="space-between" alignItems="center" w="100%">
                  <Box>
-                     <Heading as ="h5" size="sm" cursor="pointer">Priyanka Prajapati</Heading>
-                     <Text>Hello Everyone!!</Text>
+                     <Heading as ="h5" size="sm" cursor="pointer" fontWeight="600">{comment.firstName} {comment.lastName}</Heading>
+                     <Text fontSize="14px" mt="2">{comment.text}</Text>
                  </Box>
                  <Popover>
                  <PopoverTrigger>
