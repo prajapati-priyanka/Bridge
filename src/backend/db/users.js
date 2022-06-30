@@ -17,7 +17,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio:"Advanced-frontend-developer",
-    website:"priyanka-prajapati.netlify.app/",
+    website:"priyanka-prajapati.netlify.app",
     avatarUrl:"",
     bookmarks: [],
     following: [
@@ -33,16 +33,14 @@ export const users = [
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722184/third_mrjqm3.jpg",
+        avatarUrl:"",
       },
       {
         _id: uuid(),
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+        avatarUrl:"",
       },
     ],
     followers: [
@@ -58,8 +56,7 @@ export const users = [
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+        avatarUrl:"",
       },
     ],
   },
@@ -90,8 +87,7 @@ export const users = [
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722184/third_mrjqm3.jpg",
+        avatarUrl:"",
       },
     ],
     followers: [
@@ -107,8 +103,7 @@ export const users = [
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+        avatarUrl:"",
       },
     ],
   },
@@ -148,8 +143,7 @@ export const users = [
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+        avatarUrl:"",
     
       },
     ],
@@ -174,8 +168,7 @@ export const users = [
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+        avatarUrl:"",
       },
     ],
     followers: [
@@ -184,8 +177,7 @@ export const users = [
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+        avatarUrl:"",
       },
     ],
     
@@ -210,8 +202,7 @@ export const users = [
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722226/fifth_dg1lz2.jpg",
+        avatarUrl:"",
       },
     ],
     following: [
@@ -220,8 +211,7 @@ export const users = [
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+        avatarUrl:"",
       },
     ],
   },
@@ -252,8 +242,7 @@ export const users = [
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl:
-          "https://res.cloudinary.com/check-social/image/upload/v1652722197/fourth_rgotvm.jpg",
+        avatarUrl:"",
       },
     ],
     following:[],
@@ -269,8 +258,7 @@ export const users = [
     password: "letsread",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    avatarUrl:
-      "https://res.cloudinary.com/check-social/image/upload/v1652722233/second_wmzgil.jpg",
+    avatarUrl:"",
     followers: [],
     following: [],
     bookmarks: [],
