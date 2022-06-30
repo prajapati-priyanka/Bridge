@@ -7,7 +7,7 @@ import { CommentInput } from "./CommentInput";
 const PostCard = ({post})=>{
    
     return(
-        <Flex flexDirection="column" gap="2">
+        <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20" >
         
         {/* Avatar and name */}
          <Flex justifyContent="space-between">
@@ -15,7 +15,7 @@ const PostCard = ({post})=>{
              <Avatar name={post.firstName +" "+ post.lastName} src="https://unsplash.com/photos/IF9TK5Uy-KI"/>
              <Heading as="h4" size="sm">
                  {post.firstName} {post.lastName}
-                 <Text fontSize="12px" color="gray.400" mt="1">@{post.username}</Text>
+                 <Text fontSize="12px" color="gray.400" fontWeight="400" mt="1">@{post.username}</Text>
                
                
              </Heading>
@@ -117,9 +117,15 @@ const PostCard = ({post})=>{
                    }}
                 />
             </Flex>
-              
+            {/* comment Input */}
               <CommentInput />
-              <CommentCard></CommentCard>
+            
+            {/* Comments */}
+
+            {post.comments.map(comment=>(
+                <CommentCard key={comment._id} comment = {comment} />
+            ))}
+           
 
         </Flex>
     )
