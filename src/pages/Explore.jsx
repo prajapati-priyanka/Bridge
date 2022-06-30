@@ -7,6 +7,7 @@ import {
   SuggestedUsersSidebar,
   CreatePostModal,
   Header,
+  MobileNav
 } from "../components";
 import { getAllPosts } from "../redux/asyncThunks";
 
@@ -41,6 +42,19 @@ const Explore = () => {
 
         <SuggestedUsersSidebar />
       </Flex>
+      <Box
+      position="sticky"
+      bottom ="0"
+      left="0"
+      right="0"
+      h="50px"
+      bgColor="brand.200"
+      display={{base:"block", md:"none"}}
+      zIndex="2"
+      >
+        <MobileNav onOpen={onOpen} />
+
+      </Box>
     </>
   );
 };

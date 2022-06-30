@@ -31,7 +31,7 @@ const UserProfileCard = () => {
     navigate("/");
   };
   return (
-    <Flex flexDirection="column" alignItems="center">
+    <Flex flexDirection="column" alignItems="center" mb="8">
       <Avatar name={user.firstName + " " + user.lastName} src="" size="2xl" />
       <Heading as="h5" size="md" mt="1">
         {user.firstName}
