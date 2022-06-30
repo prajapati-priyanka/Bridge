@@ -1,4 +1,4 @@
-import { Box, Flex, useDisclosure, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, useDisclosure, Heading} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { MobileNav } from "../components";
