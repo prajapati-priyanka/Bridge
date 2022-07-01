@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/slices";
 
-const UserProfileCard = () => {
+const UserProfileCard = ({onOpenProfile}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -39,7 +39,7 @@ const UserProfileCard = () => {
       </Heading>
       <Text>@{user.username}</Text>
       <Flex gap="4" my="2">
-        <Button>Edit Profile</Button>
+        <Button onClick={onOpenProfile}>Edit Profile</Button>
         <IconButton
           variant="solid"
           bgColor="red.500"
