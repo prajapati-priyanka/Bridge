@@ -49,7 +49,7 @@ const nonFollowers = otherUsers.filter(item=> item.followers.every(follower=>fol
             <Flex gap="2" mt="6" alignItems="center">
               <Avatar
                 name={user.firstName + " " + user.lastName}
-                src=""
+                src={user.avatarUrl}
                 cursor="pointer"
               />
               <Box cursor="pointer">
