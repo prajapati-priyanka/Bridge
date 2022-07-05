@@ -7,7 +7,7 @@ const CommentCard = ({comment})=>{
         <Flex gap="2" mt="2">
             <Avatar
               name = {comment.firstName + " " + comment.lastName}
-              src=""
+              src={comment.avatarUrl}
               size= "sm"
               cursor="pointer"
 
