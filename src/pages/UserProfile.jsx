@@ -1,18 +1,23 @@
 import { Box, Flex, useDisclosure, Heading} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { MobileNav } from "../components";
 import {
   Header,
   PostCard,
   SideNav,
   SuggestedUsersSidebar,
-  UserProfileCard,
+  UserProfileCard,CreatePostModal, MobileNav, EditUserProfileModal 
 } from "../components";
 import { getAllPosts } from "../redux/asyncThunks/postsThunk";
 
 const UserProfile = () => {
-  const { onOpen } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenProfile,
+    onOpen: onOpenProfile,
+    onClose: onCloseProfile,
+  } = useDisclosure();
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
@@ -25,6 +30,11 @@ const UserProfile = () => {
 
   return (
     <>
+    <CreatePostModal isOpen={isOpen} onClose={onClose}/>
+    <EditUserProfileModal
+        isOpenProfile={isOpenProfile}
+        onCloseProfile={onCloseProfile}
+      />
       <Header onOpen={onOpen} />
       <Flex
         bg="var(--bg-color)"
@@ -34,7 +44,7 @@ const UserProfile = () => {
         pl="6"
         pr="6"
       >
-        <SideNav />
+        <SideNav onOpen = {onOpen}/>
         <Flex
           flexDirection="column"
           gap="5"
@@ -43,7 +53,7 @@ const UserProfile = () => {
           mr="2"
           ml="2"
         >
-          <UserProfileCard />
+          <UserProfileCard onOpenProfile={onOpenProfile}/>
           <Box w="100%">
             <Heading as="h3" size="md">
               Your Posts
