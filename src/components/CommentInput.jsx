@@ -11,7 +11,7 @@ const CommentInput = ()=>{
          <Flex gap='2' alignItems="center">
              <Avatar
                 name={user.firstName + " " + user.lastName}
-                src=""
+                src={user.avatarUrl}
                 size="sm"
              />
              <InputGroup>
