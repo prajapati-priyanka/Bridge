@@ -14,39 +14,47 @@ import {
   Input,
   Textarea,
   FormLabel,
+  useToast,
 } from "@chakra-ui/react";
 import { AiFillCamera } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { editUserProfile } from "../redux/asyncThunks";
 
 const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
-  const { user } = useSelector((state) => state.auth);
-  const [avatarImg, setAvatarImg] = useState();
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const { user, token} = useSelector((state) => state.auth);
   const [userData, setUserData] = useState({
-    bio: "",
-    website: "",
+    avatarUrl: user?.avatarUrl ? user.avatarUrl : "",
+    bio: user?.bio ? user.bio : "",
+    website: user?.website ? user.website : "",
   });
 
-  const uploadImage = async (image) => {
-    const data = new FormData();
-    data.append("file", image[0]);
-    data.append("upload_preset", "p4xrmmuy");
+  const saveAvatarToCloudinary = async (image) => {
+    try {
+      const data = new FormData();
+      data.append("file", image[0]);
+      data.append("upload_preset", "p4xrmmuy");
 
-    const requestOptions = {
-      method: "POST",
-      body: data,
-    };
-    await fetch(
-      "https://api.cloudinary.com/v1_1/prajapati-priyanka/image/upload",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setAvatarImg(data.url);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      const requestOptions = {
+        method: "POST",
+        body: data,
+      };
+      await fetch(
+        "https://api.cloudinary.com/v1_1/prajapati-priyanka/image/upload",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setUserData((prevData) => ({ ...prevData, avatarUrl: data.url }));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const inputChangeHandler = (e) => {
@@ -57,9 +65,24 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
     }));
   };
 
+  const editUserProfileHandler = async () => {
+    const response = await dispatch(editUserProfile({ userData, token }));
 
+    console.log("editUser", response)
+    if (response.status=== 201) {
+      toast({
+        description: "Profile updated successfully",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+    onCloseProfile();
+  };
 
   return (
+    
+   
     <Modal isOpen={isOpenProfile} onClose={onCloseProfile}>
       <ModalOverlay />
       <ModalContent>
@@ -71,11 +94,11 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
             <Box position="relative">
               <Avatar
                 name={user.firstName + " " + user.lastName}
-                src=""
+                src={userData.avatarUrl}
                 size="md"
               ></Avatar>
               <Box position="absolute" top="54%" left="59%">
-                <FormLabel cursor="pointer">
+                <FormLabel cursor="pointer" background="white" borderRadius="50%" p = "5px">
                   <Input
                     accept="image/*"
                     type="file"
@@ -84,9 +107,9 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
                     bgColor="red.100"
                     p="0"
                     visibility="hidden"
-                    onChange={(e) => uploadImage(e.target.files)}
+                    onChange={(e) => saveAvatarToCloudinary(e.target.files)}
                   />
-                  <AiFillCamera fontSize="20px" color="white" />
+                  <AiFillCamera fontSize="18px"/>
                 </FormLabel>
               </Box>
             </Box>
@@ -127,10 +150,11 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button>Update</Button>
+          <Button onClick={editUserProfileHandler}>Update</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
+   
   );
 };
 
