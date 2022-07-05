@@ -12,7 +12,7 @@ const PostCard = ({post})=>{
         {/* Avatar and name */}
          <Flex justifyContent="space-between">
             <Flex cursor="pointer" gap="2" alignItems="center">
-             <Avatar name={post.firstName +" "+ post.lastName} src="https://unsplash.com/photos/IF9TK5Uy-KI"/>
+             <Avatar name={post.firstName +" "+ post.lastName} src={post.avatarUrl}/>
              <Heading as="h4" size="sm">
                  {post.firstName} {post.lastName}
                  <Text fontSize="12px" color="gray.400" fontWeight="400" mt="1">@{post.username}</Text>
