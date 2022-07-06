@@ -1,5 +1,4 @@
-import { Box, Flex, useDisclosure, Heading} from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, Flex, useDisclosure, Heading, CircularProgress} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom";
 import {
@@ -19,9 +18,6 @@ const UserProfile = () => {
     onClose: onCloseProfile,
   } = useDisclosure();
 
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-  const { posts } = useSelector((state) => state.posts);
   const {username} = useParams();
   const [userProfile, setUserProfile] = useState(null);
   const [userPosts, setUserPosts] = useState(null);
