@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../redux/asyncThunks";
 
 const SuggestedUsersSidebar = () => {
@@ -18,6 +19,7 @@ const SuggestedUsersSidebar = () => {
 const {users} = useSelector(state=>state.users);
 const {user} = useSelector(state=>state.auth);
 const dispatch = useDispatch();
+const navigate = useNavigate();
 
 useEffect(()=>{
   dispatch(getAllUsers());
@@ -51,8 +53,9 @@ const nonFollowers = otherUsers.filter(item=> item.followers.every(follower=>fol
                 name={user.firstName + " " + user.lastName}
                 src={user.avatarUrl}
                 cursor="pointer"
+                onClick={()=>navigate(`/profile/${user.username}`)}
               />
-              <Box cursor="pointer">
+              <Box cursor="pointer"  onClick={()=>navigate(`/profile/${user.username}`)}>
                 <Heading as="h4" size="sm">
                  {user.firstName} {user.lastName}
                 </Heading>

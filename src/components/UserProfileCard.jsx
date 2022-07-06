@@ -59,7 +59,7 @@ const UserProfileCard = ({onOpenProfile, userProfile, userPostsLength}) => {
    }}
  ></IconButton>
 </Flex>
-      ): user.followers.some(item => item.username === userProfile?.username) ? (<Button variant="outline" my="2">Unfollow</Button>):(<Button my="2">Follow</Button>)}
+      ): user.following.some(item => item.username === userProfile?.username) ? (<Button variant="outline" my="2">Unfollow</Button>):(<Button my="2">Follow</Button>)}
      
       <Text>{userProfile?.bio}</Text>
       <Link href={userProfile?.website} isExternal fontWeight="400" color="blue.500">
