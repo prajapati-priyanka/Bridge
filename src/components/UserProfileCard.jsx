@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/slices";
 
-const UserProfileCard = ({onOpenProfile}) => {
+const UserProfileCard = ({onOpenProfile, userProfile, userPostsLength}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -32,12 +32,12 @@ const UserProfileCard = ({onOpenProfile}) => {
   };
   return (
     <Flex flexDirection="column" alignItems="center" mb="8">
-      <Avatar name={user.firstName + " " + user.lastName} src={user.avatarUrl} size="2xl" />
+      <Avatar name={userProfile?.firstName + " " + userProfile?.lastName} src={userProfile?.avatarUrl} size="2xl" />
       <Heading as="h5" size="md" mt="1">
-        {user.firstName}
-        {user.lastName}
+        {userProfile?.firstName}
+        {userProfile?.lastName}
       </Heading>
-      <Text>@{user.username}</Text>
+      <Text>@{userProfile?.username}</Text>
       <Flex gap="4" my="2">
         <Button onClick={onOpenProfile}>Edit Profile</Button>
         <IconButton
@@ -58,9 +58,9 @@ const UserProfileCard = ({onOpenProfile}) => {
           }}
         ></IconButton>
       </Flex>
-      <Text>{user.bio}</Text>
-      <Link href={user.website} isExternal fontWeight="400" color="blue.500">
-        {user.website}
+      <Text>{userProfile?.bio}</Text>
+      <Link href={userProfile?.website} isExternal fontWeight="400" color="blue.500">
+        {userProfile.website}
       </Link>
 
       <Flex
@@ -73,19 +73,19 @@ const UserProfileCard = ({onOpenProfile}) => {
       >
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            3
+            {userProfile.following.length}
           </Heading>
           <Text>Following</Text>
         </Box>
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            2
+            {userPostsLength}
           </Heading>
           <Text>Posts</Text>
         </Box>
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            5
+            {userProfile?.followers.length}
           </Heading>
           <Text>Followers</Text>
         </Box>

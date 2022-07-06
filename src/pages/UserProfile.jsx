@@ -1,6 +1,7 @@
 import { Box, Flex, useDisclosure, Heading} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {useParams} from "react-router-dom";
 import {
   Header,
   PostCard,
@@ -8,7 +9,7 @@ import {
   SuggestedUsersSidebar,
   UserProfileCard,CreatePostModal, MobileNav, EditUserProfileModal 
 } from "../components";
-import { getAllPosts } from "../redux/asyncThunks/postsThunk";
+import { getSingleUser, getUserPosts } from "../services";
 
 const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,12 +22,17 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
+  const {username} = useParams();
+  const [userProfile, setUserProfile] = useState(null);
+  const [userPosts, setUserPosts] = useState(null);
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
-    dispatch(getAllPosts());
-  }, [dispatch]);
+    getSingleUser(setUserProfile, username,setLoader);
+    getUserPosts(setUserPosts, username, setLoader);
+  }, [username]);
 
-  const userPosts = posts.filter((post) => post.username === user.username);
+ 
 
   return (
     <>
@@ -36,7 +42,10 @@ const UserProfile = () => {
         onCloseProfile={onCloseProfile}
       />
       <Header onOpen={onOpen} />
-      <Flex
+      <Box>
+        {loader ? (<CircularProgress />):(
+          <>
+           <Flex
         bg="var(--bg-color)"
         w="100%"
         gap="10"
@@ -53,15 +62,15 @@ const UserProfile = () => {
           mr="2"
           ml="2"
         >
-          <UserProfileCard onOpenProfile={onOpenProfile}/>
+          <UserProfileCard onOpenProfile={onOpenProfile} userProfile={userProfile} userPostsLength={userPosts?.length}/>
           <Box w="100%">
             <Heading as="h3" size="md">
               Your Posts
             </Heading>
 
-            {userPosts.length !== 0 ? (
+            {userPosts?.length !== 0 ? (
               <Flex flexDirection="column" gap="5" mt="2rem" mb="2rem">
-                {userPosts.map((post) => (
+                {userPosts?.map((post) => (
                   <PostCard key={post._id} post={post} />
                 ))}
               </Flex>
@@ -89,6 +98,10 @@ const UserProfile = () => {
       >
         <MobileNav onOpen={onOpen} />
 
+      </Box>
+     
+          </>
+        )} 
       </Box>
     </>
   );
