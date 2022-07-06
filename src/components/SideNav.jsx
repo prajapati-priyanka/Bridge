@@ -2,7 +2,7 @@ import { Box, ListItem, List, ListIcon } from "@chakra-ui/react";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineExplore, MdOutlineBookmarkBorder } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SideNav = () => {
   const navigate = useNavigate();
