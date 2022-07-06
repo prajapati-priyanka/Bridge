@@ -81,7 +81,7 @@ const Signup = () => {
         });
       } else {
         toast({
-          description: "Some error occured, Please try again!",
+          description: `${response.payload.data.errors[0]}`,
           status: "error",
           duration: 2000,
           isClosable: true,
