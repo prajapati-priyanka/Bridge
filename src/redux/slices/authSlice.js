@@ -32,7 +32,7 @@ const authSlice = createSlice({
 
     [loginUser.rejected]: (state, action) => {
       state.isLoading = false;
-      console.error(action.error.message)
+      console.error(action.payload.data.errors[0]);
     },
     [signupUser.pending]: (state) => {
       state.isLoading = true;
@@ -46,7 +46,7 @@ const authSlice = createSlice({
 
     [signupUser.rejected]: (state, action) => {
       state.isLoading = false;
-      console.error(action.error.message)
+      console.error(action.payload.data.errors[0]);
     },
 
     [editUserProfile.pending] : (state)=>{
@@ -58,7 +58,7 @@ const authSlice = createSlice({
     },
     [editUserProfile.rejected] : (state,action)=>{
       state.isLoading = false;
-      console.error(action.error.message);
+      console.error(action.payload.data.errors[0]);
     },
   },
 });

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const editUserProfile = createAsyncThunk(
   "auth/edit",
-  async ({ userData, token }) => {
+  async ({ userData, token }, {rejectWithValue}) => {
     try {
       const response = await axios.post(
         "/api/users/edit",
@@ -14,7 +14,10 @@ const editUserProfile = createAsyncThunk(
       const data = { data: response.data, status: response.status };
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status
+      })
     }
   }
 );
