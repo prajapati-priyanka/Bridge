@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/slices";
 
-const UserProfileCard = () => {
+const UserProfileCard = ({onOpenProfile}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -32,14 +32,14 @@ const UserProfileCard = () => {
   };
   return (
     <Flex flexDirection="column" alignItems="center" mb="8">
-      <Avatar name={user.firstName + " " + user.lastName} src="" size="2xl" />
+      <Avatar name={user.firstName + " " + user.lastName} src={user.avatarUrl} size="2xl" />
       <Heading as="h5" size="md" mt="1">
         {user.firstName}
         {user.lastName}
       </Heading>
       <Text>@{user.username}</Text>
       <Flex gap="4" my="2">
-        <Button>Edit Profile</Button>
+        <Button onClick={onOpenProfile}>Edit Profile</Button>
         <IconButton
           variant="solid"
           bgColor="red.500"

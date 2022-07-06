@@ -1,18 +1,19 @@
 import { Avatar,Box, Button, Flex, Heading,IconButton,Popover,PopoverArrow,PopoverCloseButton,PopoverContent,PopoverTrigger,PopoverBody,Text } from "@chakra-ui/react";
 import {BiDotsVerticalRounded} from "react-icons/bi"
 import {MdFavoriteBorder,MdOutlineBookmarkBorder} from "react-icons/md";
+import { useSelector } from "react-redux";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
  
 const PostCard = ({post})=>{
-   
+   const {user} = useSelector(state=> state.auth)
     return(
         <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20" >
         
         {/* Avatar and name */}
          <Flex justifyContent="space-between">
             <Flex cursor="pointer" gap="2" alignItems="center">
-             <Avatar name={post.firstName +" "+ post.lastName} src="https://unsplash.com/photos/IF9TK5Uy-KI"/>
+             <Avatar name={post.firstName +" "+ post.lastName} src={post.username === user.username ? user.avatarUrl : post.avatarUrl}/>
              <Heading as="h4" size="sm">
                  {post.firstName} {post.lastName}
                  <Text fontSize="12px" color="gray.400" fontWeight="400" mt="1">@{post.username}</Text>

@@ -6,4 +6,5 @@ export {SuggestedUsersSidebar} from "./SuggestedUsersSidebar";
 export {CreatePostModal} from "./CreatePostModal";
 export {Header} from "./Header";
 export {UserProfileCard} from "./UserProfileCard";
-export {MobileNav} from "./MobileNav"
+export {MobileNav} from "./MobileNav";
+export {EditUserProfileModal} from "./EditUserProfileModal"

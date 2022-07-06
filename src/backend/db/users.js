@@ -18,7 +18,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"Advanced-frontend-developer",
     website:"priyanka-prajapati.netlify.app",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
     bookmarks: [],
     following: [
       {
@@ -26,21 +26,21 @@ export const users = [
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
       {
         _id: uuid(),
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
       },
       {
         _id: uuid(),
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021321/social-media/pooja.jpg",
       },
     ],
     followers: [
@@ -49,14 +49,14 @@ export const users = [
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
       {
         _id: uuid(),
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021154/social-media/praveen.jpg",
       },
     ],
   },
@@ -72,7 +72,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"Aspiring web developer",
     website:"https://www.google.com/",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
     bookmarks:[],
     following: [
       {
@@ -80,14 +80,14 @@ export const users = [
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
         _id: uuid(),
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
       },
     ],
     followers: [
@@ -96,14 +96,14 @@ export const users = [
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
         _id: uuid(),
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021421/social-media/priya.jpg",
       },
     ],
   },
@@ -119,7 +119,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"I am third user",
     website:"https://www.google.com/",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
     bookmarks:[],
     followers: [
       {
@@ -127,7 +127,7 @@ export const users = [
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
     ],
     following: [
@@ -136,14 +136,14 @@ export const users = [
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
         id: uuid(),
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021421/social-media/priya.jpg",
     
       },
     ],
@@ -160,7 +160,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"I am fourth user",
     website:"https://www.google.com/",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021421/social-media/priya.jpg",
     bookmarks:[],
     following: [
       {
@@ -168,7 +168,7 @@ export const users = [
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021154/social-media/praveen.jpg",
       },
     ],
     followers: [
@@ -177,7 +177,7 @@ export const users = [
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
     ],
     
@@ -194,7 +194,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"I am fifth user",
     website:"https://www.google.com/",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021154/social-media/praveen.jpg",
     bookmarks:[],
     followers: [
       {
@@ -202,7 +202,7 @@ export const users = [
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021421/social-media/priya.jpg",
       },
     ],
     following: [
@@ -211,7 +211,7 @@ export const users = [
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021321/social-media/pooja.jpg",
       },
     ],
   },
@@ -227,7 +227,7 @@ export const users = [
     updatedAt: formatDate(),
     bio:"I am sixth user",
     website:"https://www.google.com/",
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021321/social-media/pooja.jpg",
     bookmarks:[],
     followers: [
       {
@@ -235,14 +235,14 @@ export const users = [
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
-        avatarUrl: "",
+        avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
         _id: uuid(),
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
-        avatarUrl:"",
+        avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
     ],
     following:[],
@@ -258,7 +258,7 @@ export const users = [
     password: "letsread",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    avatarUrl:"",
+    avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021384/social-media/nupur.jpg",
     followers: [],
     following: [],
     bookmarks: [],
