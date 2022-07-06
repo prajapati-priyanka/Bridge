@@ -38,29 +38,32 @@ const UserProfileCard = ({onOpenProfile, userProfile, userPostsLength}) => {
         {userProfile?.lastName}
       </Heading>
       <Text>@{userProfile?.username}</Text>
-      <Flex gap="4" my="2">
-        <Button onClick={onOpenProfile}>Edit Profile</Button>
-        <IconButton
-          variant="solid"
-          bgColor="red.500"
-          color="white"
-          fontSize="xl"
-          icon={<AiOutlineLogout />}
-          onClick={logoutHandler}
-          _hover={{
-            bgColor: "red.400",
-          }}
-          _focus={{
-            bgColor: "red.400",
-          }}
-          _active={{
-            bgColor: "red.400",
-          }}
-        ></IconButton>
-      </Flex>
+      {userProfile?.username === user.username ? (
+ <Flex gap="4" my="2">
+ <Button onClick={onOpenProfile}>Edit Profile</Button>
+ <IconButton
+   variant="solid"
+   bgColor="red.500"
+   color="white"
+   fontSize="xl"
+   icon={<AiOutlineLogout />}
+   onClick={logoutHandler}
+   _hover={{
+     bgColor: "red.400",
+   }}
+   _focus={{
+     bgColor: "red.400",
+   }}
+   _active={{
+     bgColor: "red.400",
+   }}
+ ></IconButton>
+</Flex>
+      ): user.followers.some(item => item.username === userProfile?.username) ? (<Button variant="outline" my="2">Unfollow</Button>):(<Button my="2">Follow</Button>)}
+     
       <Text>{userProfile?.bio}</Text>
       <Link href={userProfile?.website} isExternal fontWeight="400" color="blue.500">
-        {userProfile.website}
+        {userProfile?.website}
       </Link>
 
       <Flex
@@ -73,7 +76,7 @@ const UserProfileCard = ({onOpenProfile, userProfile, userPostsLength}) => {
       >
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            {userProfile.following.length}
+            {userProfile?.following.length}
           </Heading>
           <Text>Following</Text>
         </Box>
