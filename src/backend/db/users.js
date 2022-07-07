@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
 /**
  * User Database can be added here.
@@ -22,21 +21,21 @@ export const users = [
     bookmarks: [],
     following: [
       {
-        _id: uuid(),
+        _id: "64e9b0e7",
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
       {
-        _id: uuid(),
+        _id: "5e24f83a",
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
         avatarUrl:"https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
       },
       {
-        _id: uuid(),
+        _id: "4dr866vff",
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
@@ -45,14 +44,14 @@ export const users = [
     ],
     followers: [
       {
-        _id: uuid(),
+        _id: "64e9b0e7",
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
       },
       {
-        _id: uuid(),
+        _id: "5dc02a81",
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
@@ -76,14 +75,14 @@ export const users = [
     bookmarks:[],
     following: [
       {
-        _id: uuid(),
+        _id: "4ed82781",
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
-        _id: uuid(),
+        _id: "5e24f83a",
         firstName: "Sakshi",
         lastName: "Kakkar",
         username: "sakshi909",
@@ -92,14 +91,14 @@ export const users = [
     ],
     followers: [
       {
-        _id: uuid(),
+        _id: "4ed82781",
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
-        _id: uuid(),
+        _id: "8975eb7e",
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
@@ -123,7 +122,7 @@ export const users = [
     bookmarks:[],
     followers: [
       {
-        _id: uuid(),
+        _id: "4ed82781",
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
@@ -132,14 +131,14 @@ export const users = [
     ],
     following: [
       {
-        _id: uuid(),
+        _id: "4ed82781",
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
-        id: uuid(),
+        _id: "8975eb7e",
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
@@ -164,7 +163,7 @@ export const users = [
     bookmarks:[],
     following: [
       {
-        _id: uuid(),
+        _id: "5dc02a81",
         firstName: "Praveen",
         lastName: "Malviya",
         username: "pravy69",
@@ -173,7 +172,7 @@ export const users = [
     ],
     followers: [
       {
-        _id: uuid(),
+        _id: "64e9b0e7",
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",
@@ -198,7 +197,7 @@ export const users = [
     bookmarks:[],
     followers: [
       {
-        id: uuid(),
+        _id: "8975eb7e",
         firstName: "Priya",
         lastName: "Yadav",
         username: "preet15",
@@ -207,7 +206,7 @@ export const users = [
     ],
     following: [
       {
-        _id: uuid(),
+        _id: "4dr866vff",
         firstName: "Pooja",
         lastName: "Singh",
         username: "poojasingh",
@@ -218,7 +217,7 @@ export const users = [
 
   // *************6th User**************
   {
-    _id: uuid(),
+    _id: "4dr866vff",
     firstName: "Pooja",
     lastName: "Singh",
     username: "poojasingh",
@@ -231,14 +230,14 @@ export const users = [
     bookmarks:[],
     followers: [
       {
-        _id: uuid(),
+        _id: "4ed82781",
         firstName: "Priyanka",
         lastName: "Prajapati",
         username: "pihu909",
         avatarUrl: "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
       },
       {
-        _id: uuid(),
+        _id: "64e9b0e7",
         firstName: "Ankit",
         lastName: "Agarwal",
         username: "ankit123",

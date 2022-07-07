@@ -1,11 +1,13 @@
 import { ListIcon, UnorderedList,ListItem } from "@chakra-ui/react";
 import { AiOutlineHome,AiOutlineUser,AiOutlinePlusSquare} from "react-icons/ai";
 import {MdOutlineExplore,MdOutlineBookmarkBorder} from "react-icons/md";
+import { useSelector } from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom"
 
 const MobileNav = ({onOpen})=>{
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const {user} = useSelector(state=> state.auth);
     return(
         <UnorderedList
         listStyleType = "none"
@@ -52,8 +54,8 @@ const MobileNav = ({onOpen})=>{
             <ListItem
                cursor= "pointer"
                fontSize="25px"
-               onClick={() => navigate("/profile")}
-               color={`${pathname === "/profile" ? "brand.500" : "black"}`}
+               onClick={() => navigate(`/profile/${user.username}`)}
+               color={`${pathname.includes("/profile") ? "brand.500" : "black"}`}
             >
             <ListIcon as={AiOutlineUser} />
 

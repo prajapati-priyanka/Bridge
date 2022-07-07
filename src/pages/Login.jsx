@@ -62,17 +62,24 @@ const Login = () => {
           "user",
           JSON.stringify(response.payload.data.foundUser)
         );
-      }
 
-      navigate(location?.state?.from?.pathname || "/home", {
-        replace: true,
-      });
-      toast({
-        description: "Successfully Logged In",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
+        navigate(location?.state?.from?.pathname || "/home", {
+          replace: true,
+        });
+        toast({
+          description: "Successfully Logged In",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: `${response.payload.data.errors[0]}`,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
     } else {
       toast({
         description: "Enter both the fields",

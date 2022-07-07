@@ -12,12 +12,13 @@ import {
 import { AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../redux/slices";
+import { followUser,unfollowUser } from "../redux/asyncThunks";
+import { logoutUser, updateUser } from "../redux/slices";
 
-const UserProfileCard = ({onOpenProfile}) => {
+const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const toast = useToast();
 
   const logoutHandler = () => {
@@ -30,37 +31,69 @@ const UserProfileCard = ({onOpenProfile}) => {
     });
     navigate("/");
   };
+
+  const followUserHandler = async (followUserId) => {
+    const response = await dispatch(followUser({ followUserId, token }));
+    dispatch(updateUser(response?.payload.data.user));
+  };
+
+  const unfollowUserHandler = async (followUserId) =>{
+    const response = await dispatch(unfollowUser({followUserId, token}));
+    dispatch(updateUser(response?.payload.data.user))
+  }
+
+
   return (
-    <Flex flexDirection="column" alignItems="center" mb="8">
-      <Avatar name={user.firstName + " " + user.lastName} src={user.avatarUrl} size="2xl" />
+    <Flex flexDirection="column" maxW="50rem" alignItems="center" mb="8">
+      <Avatar
+        name={userProfile?.firstName + " " + userProfile?.lastName}
+        src={userProfile?.avatarUrl}
+        size="2xl"
+      />
       <Heading as="h5" size="md" mt="1">
-        {user.firstName}
-        {user.lastName}
+        {userProfile?.firstName}
+        {userProfile?.lastName}
       </Heading>
-      <Text>@{user.username}</Text>
-      <Flex gap="4" my="2">
-        <Button onClick={onOpenProfile}>Edit Profile</Button>
-        <IconButton
-          variant="solid"
-          bgColor="red.500"
-          color="white"
-          fontSize="xl"
-          icon={<AiOutlineLogout />}
-          onClick={logoutHandler}
-          _hover={{
-            bgColor: "red.400",
-          }}
-          _focus={{
-            bgColor: "red.400",
-          }}
-          _active={{
-            bgColor: "red.400",
-          }}
-        ></IconButton>
-      </Flex>
-      <Text>{user.bio}</Text>
-      <Link href={user.website} isExternal fontWeight="400" color="blue.500">
-        {user.website}
+      <Text>@{userProfile?.username}</Text>
+      {userProfile?.username === user.username ? (
+        <Flex gap="4" my="2">
+          <Button onClick={onOpenProfile}>Edit Profile</Button>
+          <IconButton
+            variant="solid"
+            bgColor="red.500"
+            color="white"
+            fontSize="xl"
+            icon={<AiOutlineLogout />}
+            onClick={logoutHandler}
+            _hover={{
+              bgColor: "red.400",
+            }}
+            _focus={{
+              bgColor: "red.400",
+            }}
+            _active={{
+              bgColor: "red.400",
+            }}
+          ></IconButton>
+        </Flex>
+      ) : user.following.some(
+          (item) => item.username === userProfile?.username
+        ) ? (
+        <Button variant="outline" my="2" onClick={() => unfollowUserHandler(userProfile._id)}>
+          Unfollow
+        </Button>
+      ) : (
+        <Button my="2" onClick={() => followUserHandler(userProfile._id)}>Follow</Button>
+      )}
+
+      <Text>{userProfile?.bio}</Text>
+      <Link
+        href={userProfile?.website}
+        isExternal
+        fontWeight="400"
+        color="blue.500"
+      >
+        {userProfile?.website}
       </Link>
 
       <Flex
@@ -73,19 +106,19 @@ const UserProfileCard = ({onOpenProfile}) => {
       >
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            3
+            {userProfile?.following?.length}
           </Heading>
           <Text>Following</Text>
         </Box>
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            2
+            {userPostsLength}
           </Heading>
           <Text>Posts</Text>
         </Box>
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            5
+            {userProfile?.followers?.length}
           </Heading>
           <Text>Followers</Text>
         </Box>

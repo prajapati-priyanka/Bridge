@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<RequiresAuth><Home /></RequiresAuth>} />
-        <Route path="/profile" element={<RequiresAuth><UserProfile /></RequiresAuth>} />
+        <Route path="/profile/:username" element={<RequiresAuth><UserProfile /></RequiresAuth>} />
         <Route path="/bookmark" element={<RequiresAuth><Bookmark /></RequiresAuth>} />
         <Route path="/explore" element={<RequiresAuth><Explore /></RequiresAuth>} />
         <Route path="/login" element={<Login />} />
