@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { followUser, getAllUsers } from "../asyncThunks";
+import { followUser, getAllUsers, unfollowUser } from "../asyncThunks";
 
 const initialState = {
     users: [],
@@ -11,7 +11,7 @@ const usersSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:{
-        [getAllUsers.pending] : (state,action)=>{
+        [getAllUsers.pending] : (state)=>{
             state.isLoading = true;
         },
         [getAllUsers.fulfilled] : (state,action)=>{
@@ -22,17 +22,28 @@ const usersSlice = createSlice({
             state.isLoading = false;
             console.error(action.payload.data.errors[0]);
         },
-        [followUser.pending]: (state,action)=>{
+        [followUser.pending]: (state)=>{
             state.isLoading= false;
         },
         [followUser.fulfilled]: (state,action)=>{
             state.isLoading = false;
-            state.user = action.payload.data.users;
+            state.users = action.payload.data.users;
         },
-        [followUser.rejected]: (state, users)=>{
+        [followUser.rejected]: (state, action)=>{
             state.isLoading = false;
             console.error(action.payload.data.errors[0]);
-        }
+        },
+        [unfollowUser.pending]:(state)=>{
+            state.isLoading= false;
+        },
+        [unfollowUser.fulfilled]: (state,action)=>{
+            state.isLoading = false;
+            state.users = action.payload.data.users;
+        },
+        [unfollowUser.rejected]: (state, action)=>{
+            state.isLoading = false;
+            console.error(action.payload.data.errors[0]);
+        },
     }
 })
 
