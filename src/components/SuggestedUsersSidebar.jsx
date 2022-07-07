@@ -12,18 +12,23 @@ import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllUsers } from "../redux/asyncThunks";
+import { getAllUsers,followUser } from "../redux/asyncThunks";
 
 const SuggestedUsersSidebar = () => {
 
 const {users} = useSelector(state=>state.users);
-const {user} = useSelector(state=>state.auth);
+const {user, token} = useSelector(state=>state.auth);
 const dispatch = useDispatch();
 const navigate = useNavigate();
 
 useEffect(()=>{
   dispatch(getAllUsers());
 },[dispatch]);
+
+const followUserHandler = async (followUserId) => {
+  const response = await dispatch(followUser({ followUserId, token }));
+  dispatch(updateUser(response?.payload.data.user));
+};
 
 
 const otherUsers = users.filter(item=> item.username !== user.username)
@@ -61,7 +66,7 @@ const nonFollowers = otherUsers.filter(item=> item.followers.every(follower=>fol
                 </Heading>
                 <Text fontSize="13px">@{user.username}</Text>
               </Box>
-              <Button leftIcon={<AiOutlinePlus />} p="2" ml="auto" fontSize="14">
+              <Button leftIcon={<AiOutlinePlus />} p="2" ml="auto" fontSize="14" onClick={()=> followUserHandler(user._id)}>
                 Follow
               </Button>
             </Flex>
