@@ -23,7 +23,7 @@ const usersSlice = createSlice({
             console.error(action.payload.data.errors[0]);
         },
         [followUser.pending]: (state)=>{
-            state.isLoading= false;
+            state.isLoading= true;
         },
         [followUser.fulfilled]: (state,action)=>{
             state.isLoading = false;
@@ -34,7 +34,7 @@ const usersSlice = createSlice({
             console.error(action.payload.data.errors[0]);
         },
         [unfollowUser.pending]:(state)=>{
-            state.isLoading= false;
+            state.isLoading= true;
         },
         [unfollowUser.fulfilled]: (state,action)=>{
             state.isLoading = false;
