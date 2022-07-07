@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const getAllUsers = createAsyncThunk(
   "users/allUsers",
-  async ({ rejectWithValue }) => {
+  async (rejectWithValue) => {
     try {
       const response = await axios.get("/api/users");
       const data = { data: response.data, status: response.status };
@@ -26,7 +26,6 @@ const followUser = createAsyncThunk(
         {},
         { headers: { authorization: token } }
       );
-      console.log("followUser", response);
       const data = { data: response.data, status: response.status };
       return data;
     } catch (error) {
@@ -39,7 +38,7 @@ const followUser = createAsyncThunk(
 );
 
 const unfollowUser = createAsyncThunk(
-  "users/unfollw",
+  "users/unfollow",
   async ({ followUserId, token }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
