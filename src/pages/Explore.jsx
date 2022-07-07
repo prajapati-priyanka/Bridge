@@ -24,10 +24,10 @@ const Explore = () => {
     <>
       {isOpen ? <CreatePostModal isOpen={isOpen} onClose={onClose} /> : null}
       <Header onOpen={onOpen} />
-      <Flex bg="var(--bg-color)" w="100%" gap="10" minH="100vh" pl="6" pr="6">
+      <Flex bg="var(--bg-color)" w="100%" gap="10" minH="100vh"pl={{base:"3", lg:"6"}} pr={{base:"3", lg:"6"}}>
         <SideNav />
         {posts.length !== 0 ? (
-          <Flex flexDirection="column" gap="5" flexGrow="1" mt="6rem">
+          <Flex flexDirection="column" gap="5" maxW="50rem" mt="6rem" mb="2rem">
             {posts.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}

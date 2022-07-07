@@ -42,8 +42,9 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
     dispatch(updateUser(response?.payload.data.user))
   }
 
+
   return (
-    <Flex flexDirection="column" alignItems="center" mb="8">
+    <Flex flexDirection="column" maxW="50rem" alignItems="center" mb="8">
       <Avatar
         name={userProfile?.firstName + " " + userProfile?.lastName}
         src={userProfile?.avatarUrl}
@@ -105,7 +106,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
       >
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            {userProfile?.following.length}
+            {userProfile?.following?.length}
           </Heading>
           <Text>Following</Text>
         </Box>
@@ -117,7 +118,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
         </Box>
         <Box cursor="pointer">
           <Heading as="h5" size="md" textAlign="center">
-            {userProfile?.followers.length}
+            {userProfile?.followers?.length}
           </Heading>
           <Text>Followers</Text>
         </Box>

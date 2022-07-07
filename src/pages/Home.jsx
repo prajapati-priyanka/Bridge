@@ -24,14 +24,14 @@ const Home = () => {
      },[dispatch]);
 
 
-     const userFeed = posts.filter(item=> item.username === user.username || user.following.some(follower=> follower.username === item.username));
+     const userFeed = posts.filter(item=> user.username === item.username || user.following.some(follower=> follower.username === item.username));
 
 
   return (
     <>
       {isOpen ? <CreatePostModal isOpen={isOpen} onClose={onClose} /> : null}
       <Header onOpen={onOpen} />
-      <Box h="100%">
+      <>
         {isLoading ? (
           <CircularProgress
           isIndeterminate
@@ -44,10 +44,10 @@ const Home = () => {
           />
         ): (
           <>
- <Flex bg="var(--bg-color)" w="100%" gap="10" minH="100vh" pl="6" pr="6">
+ <Flex bg="var(--bg-color)" w="100%" gap="10" minH="100vh" pl={{base:"3", lg:"6"}} pr={{base:"3", lg:"6"}}>
  <SideNav />
  {userFeed.length !==0 ? (
-   <Flex flexDirection="column" gap="5" flexGrow="1" mt="6rem" mr="2" ml="2">
+   <Flex flexDirection="column" gap="5" flexGrow="1" maxW="50rem" mt="6rem" mb="2rem" >
    {userFeed.map(post=> (
 
   <PostCard key={post._id} post = {post} />
@@ -77,7 +77,7 @@ zIndex="2"
 </>
         )}
      
-      </Box>
+      </>
     </>
   );
 };
