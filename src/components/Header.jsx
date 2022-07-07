@@ -30,7 +30,7 @@ const Header = ({onOpen})=>{
           p="2"
           paddingLeft="4"
         />
-        <Button leftIcon={<AiOutlinePlusSquare />} variant="solid" onClick={onOpen} display={{base:"none", md: "block"}}>
+        <Button leftIcon={<AiOutlinePlusSquare />} minW="fit-content" variant="solid" onClick={onOpen} display={{base:"none", md: "block"}}>
           Create Post
         </Button>
       </Flex>
