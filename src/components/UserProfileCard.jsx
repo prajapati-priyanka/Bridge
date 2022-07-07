@@ -12,6 +12,7 @@ import {
 import { AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { followUser,unfollowUser } from "../redux/asyncThunks";
 import { logoutUser, updateUser } from "../redux/slices";
 
 const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
@@ -35,6 +36,11 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
     const response = await dispatch(followUser({ followUserId, token }));
     dispatch(updateUser(response?.payload.data.user));
   };
+
+  const unfollowUserHandler = async (followUserId) =>{
+    const response = await dispatch(unfollowUser({followUserId, token}));
+    dispatch(updateUser(response?.payload.data.user))
+  }
 
   return (
     <Flex flexDirection="column" alignItems="center" mb="8">
@@ -72,7 +78,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
       ) : user.following.some(
           (item) => item.username === userProfile?.username
         ) ? (
-        <Button variant="outline" my="2">
+        <Button variant="outline" my="2" onClick={() => unfollowUserHandler(userProfile._id)}>
           Unfollow
         </Button>
       ) : (
