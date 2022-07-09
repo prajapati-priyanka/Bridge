@@ -12,17 +12,41 @@ import {
   PopoverTrigger,
   PopoverBody,
   Text,
+  Image,
+  useToast,
 } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdFavoriteBorder, MdOutlineBookmarkBorder } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
 import { useNavigate } from "react-router-dom";
+import { deletePost } from "../redux/asyncThunks";
 
 const PostCard = ({ post }) => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const deletePostHandler = async (post) => {
+    const response = await dispatch(deletePost({ post, token }));
+    if (response?.payload.status === 201) {
+      toast({
+        description: "Post successfully deleted",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        description: `${response.payload.data.errors[0]}`,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
       {/* Avatar and name */}
@@ -46,45 +70,64 @@ const PostCard = ({ post }) => {
             </Text>
           </Heading>
         </Flex>
-        <Popover>
-          <PopoverTrigger>
-            <IconButton
-              icon={<BiDotsVerticalRounded />}
-              bgColor="transparent"
-              color="black"
-              size="sm"
-              fontSize="lg"
-              _hover={{
-                bgColor: "transparent",
-              }}
-              _active={{
-                bgColor: "transparent",
-                border: "none",
-              }}
-              _focus={{
-                bgColor: "transparent",
-                border: "none",
-              }}
-            />
-          </PopoverTrigger>
-          <PopoverContent maxW="10rem">
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverBody>
-              <Button variant="ghost" display="block" w="60%">
-                Edit
-              </Button>
-              <Button variant="ghost" display="block" w="60%">
-                Delete
-              </Button>
-            </PopoverBody>
-          </PopoverContent>
-        </Popover>
+        {user.username === post.username ? (
+          <Popover>
+            <PopoverTrigger>
+              <IconButton
+                icon={<BiDotsVerticalRounded />}
+                bgColor="transparent"
+                color="black"
+                size="sm"
+                fontSize="lg"
+                _hover={{
+                  bgColor: "transparent",
+                }}
+                _active={{
+                  bgColor: "transparent",
+                  border: "none",
+                }}
+                _focus={{
+                  bgColor: "transparent",
+                  border: "none",
+                }}
+              />
+            </PopoverTrigger>
+            <PopoverContent maxW="10rem">
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+                <Button
+                  backgroundColor="transparent"
+                  _hover={{ backgroundColor: "gray.200" }}
+                  _active={{ border: "none", backgroundColor: "gray.100" }}
+                  _focus={{ backgroundColor: "gray.100" }}
+                  display="block"
+                  w="60%"
+                >
+                  Edit
+                </Button>
+                <Button
+                  backgroundColor="transparent"
+                  _hover={{ backgroundColor: "gray.200" }}
+                  _active={{ border: "none", backgroundColor: "gray.100" }}
+                  _focus={{ backgroundColor: "gray.100" }}
+                  display="block"
+                  w="60%"
+
+                  onClick={()=>deletePostHandler(post)}
+                >
+                  Delete
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        ) : null}
       </Flex>
 
       {/* Post Content  */}
       <Box>
         <Text>{post.content}</Text>
+        <Image src={post.img}></Image>
       </Box>
 
       {/* Like and Bookmark */}
@@ -138,7 +181,7 @@ const PostCard = ({ post }) => {
 
       {/* Comments */}
 
-      {post.comments.map((comment) => (
+      {post?.comments?.map((comment) => (
         <CommentCard key={comment._id} comment={comment} />
       ))}
     </Flex>
