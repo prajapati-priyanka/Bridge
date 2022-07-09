@@ -41,10 +41,16 @@ const UserProfile = () => {
   return (
     <>
       <CreatePostModal isOpen={isOpen} onClose={onClose} />
-      <EditUserProfileModal
+
+      {userProfile && (
+        <EditUserProfileModal
         isOpenProfile={isOpenProfile}
         onCloseProfile={onCloseProfile}
+        userProfile= {userProfile}
+        setUserProfile  = {setUserProfile}
       />
+      )}
+      
       <Header onOpen={onOpen} />
       <Box>
         <Flex
