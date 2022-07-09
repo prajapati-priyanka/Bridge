@@ -21,7 +21,11 @@ const authSlice = createSlice({
 
     updateUser: (state,action) =>{
       state.user = action.payload;
-    }
+    },
+
+    setLoading: (state) => {
+      state.isLoading = true;
+    },
   },
   extraReducers: {
     [loginUser.pending]: (state) => {
@@ -67,5 +71,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {logoutUser, updateUser} = authSlice.actions;
+export const {logoutUser, updateUser, setLoading} = authSlice.actions;
 export const {reducer:authReducer} = authSlice
