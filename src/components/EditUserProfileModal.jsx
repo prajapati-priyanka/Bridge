@@ -20,47 +20,87 @@ import { AiFillCamera } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { editUserProfile } from "../redux/asyncThunks";
+import { saveImageToCloudinary } from "../services";
+import { updateUser, setLoading } from "../redux/slices";
 
-const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
+const EditUserProfileModal = ({
+  isOpenProfile,
+  onCloseProfile,
+  userProfile,
+  setUserProfile,
+}) => {
   const dispatch = useDispatch();
   const toast = useToast();
-  const { user, token } = useSelector((state) => state.auth);
-  const [userData, setUserData] = useState({
-    avatarUrl: user?.avatarUrl ? user.avatarUrl : "",
-    bio: user?.bio ? user.bio : "",
-    website: user?.website ? user.website : "",
-  });
+  const {token, isLoading, user } = useSelector((state) => state.auth);
+  const initialUserData = { ...userProfile, avatarUrl:"", avatarFile: {} }
+  const [userData, setUserData] = useState(initialUserData);
 
-  const [loading, setLoading] = useState(false);
+  let reader = new FileReader();
 
-  const saveAvatarToCloudinary = async (image) => {
-    try {
-      const data = new FormData();
-      data.append("file", image[0]);
-      data.append("upload_preset", "p4xrmmuy");
-      setLoading(true);
-      const requestOptions = {
-        method: "POST",
-        body: data,
-      };
 
-      await fetch(
-        "https://api.cloudinary.com/v1_1/prajapati-priyanka/image/upload",
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setUserData((prevData) => ({ ...prevData, avatarUrl: data.url }));
-        })
-        .catch((error) => {
-          console.error(error);
+  const addProfileImageHandler = (e) => {
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setUserData({
+          ...userData,
+          avatarUrl: reader.result,
+          avatarFile: e.target.files[0],
         });
+      }
+    };
+  };
+
+  const saveEditedUser = async (data) => {
+    try {
+      const response = await dispatch(editUserProfile({ userData: data, token }));
+      if (response?.payload.status === 201) {
+        setUserProfile(response.payload.data.user);
+        dispatch(updateUser(response.payload.data.user));
+        toast({
+          description: "Profile updated successfully",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: `${response.payload.data.errors[0]}`,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const editUserProfileHandler = async () => {
+    try {
+      if (userData.avatarUrl !== "") {
+        dispatch(setLoading());
+        await saveImageToCloudinary(
+          userData.avatarFile,
+          saveEditedUser,
+          userData,
+          "image"
+        );
+      } else if (
+        userData.bio !== userProfile.bio ||
+        userData.website !== userProfile.website
+        
+      ) {
+        saveEditedUser(userData);
+      }
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      onCloseProfile();
     }
   };
+
+  
 
   const inputChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -70,26 +110,7 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
     }));
   };
 
-  const editUserProfileHandler = async () => {
-    const response = await dispatch(editUserProfile({ userData, token }));
 
-    if (response?.payload.status === 201) {
-      toast({
-        description: "Profile updated successfully",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    }else{
-      toast({
-        description: `${response.payload.data.errors[0]}`,
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-    onCloseProfile();
-  };
 
   return (
     <Modal isOpen={isOpenProfile} onClose={onCloseProfile}>
@@ -100,15 +121,10 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
         <ModalBody>
           <Flex gap="10" mb="2">
             <Text>Avatar</Text>
-            {loading ? (
-              <Text fontWeight="500" color="blue.500">
-                Updating...
-              </Text>
-            ) : (
               <Box position="relative">
                 <Avatar
-                  name={user.firstName + " " + user.lastName}
-                  src={userData?.avatarUrl}
+                  name={userData?.firstName + " " + userData?.lastName}
+                  src={userData?.avatarUrl || userProfile?.avatarUrl}
                   size="md"
                 ></Avatar>
                 <Box position="absolute" top="54%" left="59%">
@@ -126,23 +142,23 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
                       bgColor="red.100"
                       p="0"
                       visibility="hidden"
-                      onChange={(e) => saveAvatarToCloudinary(e.target.files)}
+                      onChange={addProfileImageHandler}
                     />
                     <AiFillCamera fontSize="18px" />
                   </FormLabel>
                 </Box>
               </Box>
-            )}
+          
           </Flex>
           <Flex gap="10" mb="2">
             <Text>Name</Text>
             <Text>
-              {user.firstName} {user.lastName}
+              {userData?.firstName} {userData?.lastName}
             </Text>
           </Flex>
           <Flex gap="3" mb="2">
             <Text>Username</Text>
-            <Text>@{user.username}</Text>
+            <Text>@{userData?.username}</Text>
           </Flex>
           <Flex gap="6" mb="2">
             <Text>Website</Text>
@@ -173,7 +189,7 @@ const EditUserProfileModal = ({ isOpenProfile, onCloseProfile }) => {
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={editUserProfileHandler}>Update</Button>
+          <Button isLoading={isLoading} onClick={editUserProfileHandler}>Update</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
