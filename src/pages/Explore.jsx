@@ -22,7 +22,7 @@ const Explore = () => {
     if (status === "idle") {
       dispatch(getAllPosts());
     }
-  }, [dispatch]);
+  }, [dispatch, status]);
 
   return (
     <>
