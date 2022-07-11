@@ -14,6 +14,7 @@ import {
   Text,
   Image,
   useToast,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdFavoriteBorder, MdOutlineBookmarkBorder } from "react-icons/md";
@@ -23,7 +24,7 @@ import { CommentInput } from "./CommentInput";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../redux/asyncThunks";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, onOpen, setEditedPost }) => {
   const { user, token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,6 +48,13 @@ const PostCard = ({ post }) => {
       });
     }
   };
+
+
+  const editPostHandler = (post) => {
+    setEditedPost(post);
+    onOpen();
+  };
+
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
       {/* Avatar and name */}
@@ -103,6 +111,7 @@ const PostCard = ({ post }) => {
                   _focus={{ backgroundColor: "gray.100" }}
                   display="block"
                   w="60%"
+                  onClick={()=>editPostHandler(post)}
                 >
                   Edit
                 </Button>
@@ -127,7 +136,11 @@ const PostCard = ({ post }) => {
       {/* Post Content  */}
       <Box>
         <Text>{post.content}</Text>
-        <Image src={post.img}></Image>
+        
+        {post?.img && !post.img.includes("jpg" || "png" || "gif" || "webp") ? (<AspectRatio height={"500px"} w="full" maxW="full" ratio={16/9}>
+          <video controls src={post.img} ></video>
+
+        </AspectRatio>): (<Image w="full" maxW="full" objectFit="cover" src={post.img} ></Image>)}
       </Box>
 
       {/* Like and Bookmark */}
