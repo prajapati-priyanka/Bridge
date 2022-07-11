@@ -31,7 +31,7 @@ const EditUserProfileModal = ({
 }) => {
   const dispatch = useDispatch();
   const toast = useToast();
-  const {token, isLoading, user } = useSelector((state) => state.auth);
+  const {token, isLoading } = useSelector((state) => state.auth);
   const initialUserData = { ...userProfile, avatarUrl:"", avatarFile: {} }
   const [userData, setUserData] = useState(initialUserData);
 
