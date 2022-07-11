@@ -9,7 +9,11 @@ const initialState = {
 const postsSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: {},
+    reducers: {
+      setBtnLoading: (state) => {
+        state.isLoading = true;
+      },
+    },
     extraReducers:{
         [getAllPosts.pending]: (state, action) => {
             state.isLoading = true;
@@ -61,4 +65,5 @@ const postsSlice = createSlice({
     }
 });
 
+export const { setBtnLoading } = postsSlice.actions;
 export const {reducer: postsReducer} = postsSlice;
