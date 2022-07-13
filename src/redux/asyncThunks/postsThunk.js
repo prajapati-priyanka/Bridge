@@ -78,8 +78,9 @@ const deletePost = createAsyncThunk(
 
 const likePost = createAsyncThunk(
   "posts/likePost",
-  async ({ postId, token }, { rejectWithValue }) => {
+  async ({ postId, token, setLikeBtnDisable }, { rejectWithValue }) => {
     try {
+      setLikeBtnDisable(true)
       const response = await axios.post(
         `/api/posts/like/${postId}`,
         {},
@@ -94,14 +95,17 @@ const likePost = createAsyncThunk(
         data: error.response.data,
         status: error.response.status,
       });
+    }finally{
+      setLikeBtnDisable(false)
     }
   }
 );
 
 const dislikePost = createAsyncThunk(
   "posts/dislikePost",
-  async ({ postId, token }, { rejectWithValue }) => {
+  async ({ postId, token, setLikeBtnDisable }, { rejectWithValue }) => {
     try {
+      setLikeBtnDisable(true)
       const response = await axios.post(
         `/api/posts/dislike/${postId}`,
         {},
@@ -116,6 +120,8 @@ const dislikePost = createAsyncThunk(
         data: error.response.data,
         status: error.response.status,
       });
+    }finally{
+      setLikeBtnDisable(false)
     }
   }
 );
