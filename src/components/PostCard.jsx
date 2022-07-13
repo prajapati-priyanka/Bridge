@@ -62,7 +62,7 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
   );
 
   const likeHandler = async (postId) => {
-    isLiked
+    isPostLiked
       ? await dispatch(dislikePost({ postId, token }))
       : await dispatch(likePost({ postId, token }));
   };
