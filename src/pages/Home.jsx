@@ -67,7 +67,7 @@ const Home = () => {
               pl={{ base: "3", lg: "6" }}
               pr={{ base: "3", lg: "6" }}
             >
-              <SideNav />
+              <SideNav onOpen={onOpen} />
               {userFeed.length !== 0 ? (
                 <Flex
                   flexDirection="column"
