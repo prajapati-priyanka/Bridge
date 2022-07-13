@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser,signupUser, editUserProfile, addToBookmark, removeFromBookmark } from "../asyncThunks";
+import { loginUser,signupUser, editUserProfile, addToBookmark, removeFromBookmark, getUserBookmarks } from "../asyncThunks";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   token: localStorage.getItem("token") || null,
   isLoading: false,
   bookmarks: [],
-  isBookmarkLoading: false
+  bookmarkStatus: "idle"
+
 };
 
 const authSlice = createSlice({
@@ -70,26 +71,37 @@ const authSlice = createSlice({
       console.error(action.payload.data.errors[0]);
     },
     [addToBookmark.pending]: (state) => {
-      state.isBookmarkLoading = true;
+      state.isLoading = true;
     },
     [addToBookmark.fulfilled]: (state, action) => {
-      state.isBookmarkLoading = false;
+      state.isLoading = false;
       state.bookmarks = action.payload.data.bookmarks;
     },
     [addToBookmark.rejected]: (state, action) => {
-      state.isBookmarkLoading = false;
+      state.isLoading = false;
       console.error(action.payload.data.errors[0]);
     },
     [removeFromBookmark.pending]: (state) => {
-      state.isBookmarkLoading = true;
+      state.isLoading = true;
     },
     [removeFromBookmark.fulfilled]: (state, action) => {
-      state.isBookmarkLoading = false;
+      state.isLoading = false;
       state.bookmarks = action.payload.data.bookmarks;
     },
     [removeFromBookmark.rejected]: (state, action) => {
-      state.isBookmarkLoading = false;
+      state.isLoading = false;
       console.error(action.payload.data.errors[0]);
+    },
+    [getUserBookmarks.pending]: (state) => {
+      state.bookmarkStatus = "pending";
+    },
+    [getUserBookmarks.fulfilled]: (state, action) => {
+      state.bookmarkStatus = "resolved";
+      state.bookmarks = action.payload.data.bookmarks;
+    },
+    [getUserBookmarks.rejected]: (state, action) => {
+      state.bookmarkStatus = "rejected";
+      console.error(action);
     },
   },
 });
