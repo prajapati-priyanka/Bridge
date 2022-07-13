@@ -99,7 +99,7 @@ const likePost = createAsyncThunk(
 );
 
 const dislikePost = createAsyncThunk(
-  "posts/likePost",
+  "posts/dislikePost",
   async ({ postId, token }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
