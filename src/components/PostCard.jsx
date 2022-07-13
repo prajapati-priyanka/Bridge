@@ -22,13 +22,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../redux/asyncThunks";
+import { deletePost, likePost, dislikePost } from "../redux/asyncThunks";
+import { FcLike } from "react-icons/fc";
 
 const PostCard = ({ post, onOpen, setEditedPost }) => {
   const { user, token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
+  const {isLikeLoading} = useSelector(state=>state.posts);
 
   const deletePostHandler = async (post) => {
     const response = await dispatch(deletePost({ post, token }));
@@ -53,6 +55,16 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
   const editPostHandler = (post) => {
     setEditedPost(post);
     onOpen();
+  };
+
+  const isPostLiked = post?.likes.likedBy.some(
+    (currentUser) => currentUser._id === user._id
+  );
+
+  const likeHandler = async (postId) => {
+    isLiked
+      ? await dispatch(dislikePost({ postId, token }))
+      : await dispatch(likePost({ postId, token }));
   };
 
   return (
@@ -148,9 +160,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
       <Flex justifyContent="space-between" alignItems="center">
         <Flex alignItems="center">
           <IconButton
-            icon={<MdFavoriteBorder />}
+            icon={isPostLiked ? <FcLike /> : <MdFavoriteBorder />}
             bgColor="transparent"
-            color="black"
+            color={isPostLiked ? "red.400" : "black"}
             size="sm"
             fontSize="lg"
             borderRadius="50%"
@@ -165,6 +177,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
               bgColor: "red.100",
               borderColor: "transparent",
             }}
+
+            onClick ={()=> likeHandler(post._id)}
+            isLoading= {isLikeLoading}
           />
 
           <Text>{post.likes.likeCount} likes</Text>
