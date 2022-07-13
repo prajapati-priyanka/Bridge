@@ -51,8 +51,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
         size="2xl"
       />
       <Heading as="h5" size="md" mt="1">
-        {userProfile?.firstName}
-        {userProfile?.lastName}
+        {userProfile?.firstName}  {userProfile?.lastName}
       </Heading>
       <Text>@{userProfile?.username}</Text>
       {userProfile?.username === user.username ? (
