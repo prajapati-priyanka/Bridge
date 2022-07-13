@@ -1,9 +1,4 @@
-import {
-  Box,
-  Flex,
-  useDisclosure,
-  Heading,
-} from "@chakra-ui/react";
+import { Box, Flex, useDisclosure, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -32,6 +27,7 @@ const UserProfile = () => {
   const { users } = useSelector((state) => state.users);
   const [userProfile, setUserProfile] = useState(null);
   const [userPosts, setUserPosts] = useState(null);
+  const [editedPost, setEditedPost] = useState(null);
 
   useEffect(() => {
     getSingleUser(setUserProfile, username);
@@ -40,11 +36,24 @@ const UserProfile = () => {
 
   return (
     <>
-      <CreatePostModal isOpen={isOpen} onClose={onClose} />
-      <EditUserProfileModal
-        isOpenProfile={isOpenProfile}
-        onCloseProfile={onCloseProfile}
-      />
+      {isOpen ? (
+        <CreatePostModal
+          isOpen={isOpen}
+          onClose={onClose}
+          editedPost={editedPost}
+          setEditedPost={setEditedPost}
+        />
+      ) : null}
+
+      {userProfile && (
+        <EditUserProfileModal
+          isOpenProfile={isOpenProfile}
+          onCloseProfile={onCloseProfile}
+          userProfile={userProfile}
+          setUserProfile={setUserProfile}
+        />
+      )}
+
       <Header onOpen={onOpen} />
       <Box>
         <Flex
@@ -74,7 +83,7 @@ const UserProfile = () => {
                 Your Posts
               </Heading>
 
-              {userPosts?.length !== 0 ? (
+              {userPosts?.length > 0 ? (
                 <Flex
                   flexDirection="column"
                   gap="5"
@@ -82,8 +91,13 @@ const UserProfile = () => {
                   mt="2rem"
                   mb="2rem"
                 >
-                  {userPosts?.map((post) => (
-                    <PostCard key={post._id} post={post} />
+                  {[...userPosts]?.reverse().map((post) => (
+                    <PostCard
+                      key={post._id}
+                      post={post}
+                      setEditedPost={setEditedPost}
+                      onOpen = {onOpen}
+                    />
                   ))}
                 </Flex>
               ) : (
