@@ -44,7 +44,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
 
 
   return (
-    <Flex flexDirection="column" maxW="50rem" alignItems="center" mb="8">
+    <Flex flexDirection="column" maxW={{base:"70rem", lg:"50rem"}} alignItems="center" mb="8">
       <Avatar
         name={userProfile?.firstName + " " + userProfile?.lastName}
         src={userProfile?.avatarUrl}
