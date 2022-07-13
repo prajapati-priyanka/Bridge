@@ -4,7 +4,7 @@ import { getAllPosts, createPost, editPost, deletePost, likePost, dislikePost } 
 const initialState = {
     posts:[],
     isLoading: false,
-    isLikeLoading: false
+  
 }
 
 const postsSlice = createSlice({
@@ -64,25 +64,25 @@ const postsSlice = createSlice({
             console.error(action.payload.data.errors[0]);
           },
           [likePost.pending]: (state) => {
-            state.isLikeLoading = true;
+            state.isLoading = true;
           },
           [likePost.fulfilled]: (state, action) => {
-            state.isLikeLoading = false;
+            state.isLoading = false;
             state.posts = action.payload.data.posts;
           },
           [likePost.rejected]: (state, action) => {
-            state.isLikeLoading = false;
+            state.isLoading = false;
             console.error(action.payload.data.errors[0]);
           },
           [dislikePost.pending]: (state) => {
-            state.isLikeLoading = true;
+            state.isLoading = true;
           },
           [dislikePost.fulfilled]: (state, action) => {
-            state.isLikeLoading = false;
+            state.isLoading = false;
             state.posts = action.payload.data.posts;
           },
           [dislikePost.rejected]: (state, action) => {
-            state.isLikeLoading = false;
+            state.isLoading = false;
             console.error(action.payload.data.errors[0]);
           },
     }
