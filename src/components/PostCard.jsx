@@ -80,6 +80,15 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
       : await dispatch(addToBookmark({ postId, token, setBookmarkBtnDisable }));
   };
 
+  const getLikeUsers = () => {
+    if (post?.likes.likeCount === 1) {
+      return `Liked by ${post.likes.likedBy[0].username}`;
+    }
+    return `Liked by ${post.likes.likedBy[0].username} and ${
+      post.likes.likeCount - 1
+    } others`;
+  };
+
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
       {/* Avatar and name */}
@@ -195,7 +204,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
             isLoading= {likeBtnDisbale}
           />
 
-          <Text>{post.likes.likeCount} likes</Text>
+{post.likes.likeCount > 0 ? (
+            <Text as="span">{getLikeUsers()}</Text>
+          ) : null}
         </Flex>
         <IconButton
           icon={isPostBookmarked ? <MdBookmark /> : <MdOutlineBookmarkBorder />}
