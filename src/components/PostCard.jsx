@@ -17,20 +17,23 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdFavoriteBorder, MdOutlineBookmarkBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdOutlineBookmarkBorder, MdBookmark } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
 import { useNavigate } from "react-router-dom";
-import { deletePost, likePost, dislikePost } from "../redux/asyncThunks";
+import { deletePost, likePost, dislikePost, addToBookmark, removeFromBookmark } from "../redux/asyncThunks";
 import { FcLike } from "react-icons/fc";
+import { useState } from "react";
 
 const PostCard = ({ post, onOpen, setEditedPost }) => {
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, bookmarks} = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
-  const {isLikeLoading} = useSelector(state=>state.posts);
+  const [likeBtnDisbale, setLikeBtnDisable] = useState(false);
+  const [bookmarkBtnDisable, setBookmarkBtnDisable] = useState(false);
+
 
   const deletePostHandler = async (post) => {
     const response = await dispatch(deletePost({ post, token }));
@@ -63,8 +66,18 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
 
   const likeHandler = async (postId) => {
     isPostLiked
-      ? await dispatch(dislikePost({ postId, token }))
-      : await dispatch(likePost({ postId, token }));
+      ? await dispatch(dislikePost({ postId, token, setLikeBtnDisable }))
+      : await dispatch(likePost({ postId, token, setLikeBtnDisable }));
+  };
+
+ 
+
+  const isPostBookmarked = bookmarks.some((currentPost) => currentPost === post._id);
+
+  const bookmarkHandler = async (postId) => {
+    isPostBookmarked
+      ? await dispatch(removeFromBookmark({ postId, token, setBookmarkBtnDisable }))
+      : await dispatch(addToBookmark({ postId, token, setBookmarkBtnDisable }));
   };
 
   return (
@@ -179,13 +192,13 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
             }}
 
             onClick ={()=> likeHandler(post._id)}
-            isLoading= {isLikeLoading}
+            isLoading= {likeBtnDisbale}
           />
 
           <Text>{post.likes.likeCount} likes</Text>
         </Flex>
         <IconButton
-          icon={<MdOutlineBookmarkBorder />}
+          icon={isPostBookmarked ? <MdBookmark /> : <MdOutlineBookmarkBorder />}
           bgColor="transparent"
           color="black"
           size="sm"
@@ -202,6 +215,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
             bgColor: "red.100",
             borderColor: "transparent",
           }}
+
+          onClick = {()=> bookmarkHandler(post._id)}
+          isLoading = {bookmarkBtnDisable}
         />
       </Flex>
       {/* comment Input */}
