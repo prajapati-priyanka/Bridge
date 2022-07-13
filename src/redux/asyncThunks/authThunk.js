@@ -29,4 +29,48 @@ const signupUser = createAsyncThunk("auth/signup", async (newUser, {rejectWithVa
   }
 });
 
-export { loginUser, signupUser };
+const addToBookmark = createAsyncThunk(
+  "posts/addBookmark",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/api/users/bookmark/${postId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    }
+  }
+);
+
+const removeFromBookmark = createAsyncThunk(
+  "posts/removeBookmark",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/api/users/remove-bookmark/${postId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    }
+  }
+);
+
+export { loginUser, signupUser, addToBookmark, removeFromBookmark };
