@@ -3,6 +3,7 @@ export {
   signupUser,
   addToBookmark,
   removeFromBookmark,
+  getUserBookmarks
 } from "./authThunk";
 export {
   getAllPosts,
