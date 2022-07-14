@@ -30,6 +30,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
         },
       ],
+      dislikedBy:[]
     },
     username: "pihu909",
     firstName: "Priyanka",
@@ -60,6 +61,7 @@ export const posts = [
         createdAt: new Date("June 03 2022 08:08:45"),
       },
     ],
+    
   },
 
   {
@@ -87,6 +89,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
         },
       ],
+      dislikedBy:[],
     },
     firstName: "Ankit",
     lastName: "Agarwal",
@@ -131,6 +134,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
         },
       ],
+      dislikedBy:[]
     },
     firstName: "Sakshi",
     lastName: "Kakkar",
@@ -158,6 +162,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021321/social-media/pooja.jpg",
         },
       ],
+      dislikedBy:[]
     },
     firstName: "Praveen",
     lastName: "Malviya",
@@ -184,6 +189,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021384/social-media/nupur.jpg",
         },
       ],
+      dislikedBy:[]
     },
     firstName: "Priya",
     lastName: "Yadav",
@@ -234,6 +240,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
         },
       ],
+      dislikedBy:[]
     },
     firstName: "Pooja",
     lastName: "Singh",
@@ -276,6 +283,7 @@ export const posts = [
             "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021154/social-media/praveen.jpg",
         },
       ],
+      dislikedBy:[]
     },
     firstName: "Nupur",
     lastName: "Dey",
