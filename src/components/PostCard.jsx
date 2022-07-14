@@ -65,6 +65,7 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
   );
 
   const likeHandler = async (postId) => {
+  
     isPostLiked
       ? await dispatch(dislikePost({ postId, token, setLikeBtnDisable }))
       : await dispatch(likePost({ postId, token, setLikeBtnDisable }));
@@ -79,7 +80,7 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
       ? await dispatch(removeFromBookmark({ postId, token, setBookmarkBtnDisable }))
       : await dispatch(addToBookmark({ postId, token, setBookmarkBtnDisable }));
   };
-
+  
   const getLikeUsers = () => {
     if (post?.likes.likeCount === 1) {
       return `Liked by ${post.likes.likedBy[0].username}`;
@@ -87,7 +88,7 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
     return `Liked by ${post.likes.likedBy[0].username} and ${
       post.likes.likeCount - 1
     } others`;
-  };
+  }
 
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
