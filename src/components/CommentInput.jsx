@@ -1,6 +1,8 @@
 import { Avatar, Flex, Input, InputGroup, InputRightElement,IconButton, useToast } from "@chakra-ui/react";
 import {AiOutlineSend} from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { addComment } from "../redux/asyncThunks";
 
 
 const CommentInput = ({postId})=>{
@@ -37,6 +39,8 @@ const CommentInput = ({postId})=>{
               isClosable: true,
             });
           }
+
+          setCommentData("")
         }
       };
     
