@@ -47,7 +47,7 @@ export const posts = [
         username: "ankit123",
         avatarUrl:
           "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021236/social-media/ankit.jpg",
-        text: "First Comment",
+        commentData: "First Comment",
         createdAt: new Date("June 02 2022 08:08:45"),
       },
       {
@@ -57,7 +57,7 @@ export const posts = [
         username: "sakshi909",
         avatarUrl:
           "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
-        text: "helloo!!",
+        commentData: "helloo!!",
         createdAt: new Date("June 03 2022 08:08:45"),
       },
     ],
