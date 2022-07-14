@@ -15,8 +15,10 @@ import {
   CreatePostModal,
   Header,
   MobileNav,
+  Filters,
 } from "../components";
 import { getAllPosts } from "../redux/asyncThunks";
+import { filterPosts } from "../utlis";
 
 const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,6 +26,7 @@ const Home = () => {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const { user } = useSelector((state) => state.auth);
   const [editedPost, setEditedPost] = useState(null);
+  const [filterType, setFilterType] = useState("noFilter");
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -34,6 +37,8 @@ const Home = () => {
       user.username === item.username ||
       user.following.some((follower) => follower.username === item.username)
   );
+
+  const filteredPosts = filterPosts(userFeed, filterType);
 
   return (
     <>
@@ -68,6 +73,7 @@ const Home = () => {
               pr={{ base: "3", lg: "6" }}
             >
               <SideNav onOpen={onOpen} />
+
               {userFeed.length !== 0 ? (
                 <Flex
                   flexDirection="column"
@@ -77,6 +83,11 @@ const Home = () => {
                   mt="6rem"
                   mb="2rem"
                 >
+                  <Filters
+                    filterType={filterType}
+                    setFilterType={setFilterType}
+                  />
+
                   {[...userFeed].reverse().map((post) => (
                     <PostCard
                       key={post._id}

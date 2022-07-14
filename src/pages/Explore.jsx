@@ -8,14 +8,17 @@ import {
   CreatePostModal,
   Header,
   MobileNav,
+  Filters,
 } from "../components";
 import { getAllPosts } from "../redux/asyncThunks";
+import { filterPosts } from "../utlis";
 
 const Explore = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const { posts, status } = useSelector((state) => state.posts);
   const [editedPost, setEditedPost] = useState(null);
+  const [filterType, setFilterType] = useState("noFilter");
 
   useEffect(() => {
     
@@ -23,6 +26,8 @@ const Explore = () => {
       dispatch(getAllPosts());
     }
   }, [dispatch, status]);
+
+  const filteredPosts = filterPosts(posts, filterType);
 
   return (
     <>
@@ -46,7 +51,9 @@ const Explore = () => {
         <SideNav />
         {posts.length !== 0 ? (
           <Flex flexDirection="column" gap="5" maxW="50rem" mt="6rem" mb="2rem">
-            {[...posts].reverse().map((post) => (
+            <Filters filterType={filterType}
+                    setFilterType={setFilterType} />
+            {[...filteredPosts].map((post) => (
               <PostCard
                 key={post._id}
                 post={post}
