@@ -12,6 +12,9 @@ export {
   deletePost,
   likePost,
   dislikePost,
+  addComment,
+  editComment,
+  deleteComment
 } from "./postsThunk";
 export { getAllUsers, followUser, unfollowUser } from "./usersThunk";
 export { editUserProfile } from "./profileThunk";

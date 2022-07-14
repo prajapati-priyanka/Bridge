@@ -75,7 +75,11 @@ const SideNav = () => {
             bgColor: "#e6ddd2",
           }}
           onClick={() => navigate(`/profile/${user.username}`)}
-          color={`${pathname.includes("/profile") ? "brand.500" : "black"}`}
+          color={`${
+            pathname.includes("/profile") && pathname.includes(`${user.username}`)
+              ? "brand.500"
+              : "black"
+          }`}
         >
           <ListIcon as={AiOutlineUser} mb="0.5" mr="1rem" />
           Profile

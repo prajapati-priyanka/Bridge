@@ -1,22 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-const getAllPosts = createAsyncThunk("posts/allPosts", async(rejectWithValue) =>{
-  try{
-    const response = await axios.get("/api/posts")
-    const data = {data: response.data, status: response.status};
-    return data;
-
-  } catch(error){
-    return rejectWithValue({
-      data: error.response.data,
-      status: error.response.status
-    })
-  } 
-
-});
-
+const getAllPosts = createAsyncThunk(
+  "posts/allPosts",
+  async (rejectWithValue) => {
+    try {
+      const response = await axios.get("/api/posts");
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    }
+  }
+);
 
 const createPost = createAsyncThunk(
   "posts/createPost",
@@ -80,7 +79,7 @@ const likePost = createAsyncThunk(
   "posts/likePost",
   async ({ postId, token, setLikeBtnDisable }, { rejectWithValue }) => {
     try {
-      setLikeBtnDisable(true)
+      setLikeBtnDisable(true);
       const response = await axios.post(
         `/api/posts/like/${postId}`,
         {},
@@ -95,8 +94,8 @@ const likePost = createAsyncThunk(
         data: error.response.data,
         status: error.response.status,
       });
-    }finally{
-      setLikeBtnDisable(false)
+    } finally {
+      setLikeBtnDisable(false);
     }
   }
 );
@@ -105,7 +104,7 @@ const dislikePost = createAsyncThunk(
   "posts/dislikePost",
   async ({ postId, token, setLikeBtnDisable }, { rejectWithValue }) => {
     try {
-      setLikeBtnDisable(true)
+      setLikeBtnDisable(true);
       const response = await axios.post(
         `/api/posts/dislike/${postId}`,
         {},
@@ -120,11 +119,83 @@ const dislikePost = createAsyncThunk(
         data: error.response.data,
         status: error.response.status,
       });
-    }finally{
-      setLikeBtnDisable(false)
+    } finally {
+      setLikeBtnDisable(false);
     }
   }
 );
 
+const addComment = createAsyncThunk(
+  "posts/addComment",
+  async ({ postId, commentData, token, setCommentBtnDisable}, { rejectWithValue }) => {
+    try {
+      setCommentBtnDisable(true);
+      const response = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData },
+        { headers: { authorization: token } }
+      );
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    } finally {
+      setCommentBtnDisable(false);
+    }
+  }
+);
 
-export {getAllPosts, createPost, editPost, deletePost, likePost, dislikePost};
+const editComment = createAsyncThunk(
+  "posts/editComment",
+  async ({ postId, commentId, commentData, token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/api/comments/edit/${postId}/${commentId}`,
+        { commentData },
+        { headers: { authorization: token } }
+      );
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    }
+  }
+);
+
+const deleteComment = createAsyncThunk(
+  "posts/deleteComment",
+  async ({ postId, commentId, token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/api/comments/delete/${postId}/${commentId}`,
+        {},
+        { headers: { authorization: token } }
+      );
+      const data = { data: response.data, status: response.status };
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        data: error.response.data,
+        status: error.response.status,
+      });
+    }
+  }
+);
+
+export {
+  getAllPosts,
+  createPost,
+  editPost,
+  deletePost,
+  likePost,
+  dislikePost,
+  addComment,
+  editComment,
+  deleteComment,
+};
