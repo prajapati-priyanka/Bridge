@@ -23,7 +23,7 @@ const UserProfile = () => {
   } = useDisclosure();
 
   const { username } = useParams();
-  const { posts } = useSelector((state) => state.auth);
+  const { posts } = useSelector((state) => state.posts);
   const { users } = useSelector((state) => state.users);
   const [userProfile, setUserProfile] = useState(null);
   const [userPosts, setUserPosts] = useState(null);
