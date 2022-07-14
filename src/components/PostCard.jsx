@@ -17,18 +17,23 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdFavoriteBorder, MdOutlineBookmarkBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdOutlineBookmarkBorder, MdBookmark } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentCard } from "./CommentCard";
 import { CommentInput } from "./CommentInput";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../redux/asyncThunks";
+import { deletePost, likePost, dislikePost, addToBookmark, removeFromBookmark } from "../redux/asyncThunks";
+import { FcLike } from "react-icons/fc";
+import { useState } from "react";
 
 const PostCard = ({ post, onOpen, setEditedPost }) => {
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, bookmarks} = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
+  const [likeBtnDisbale, setLikeBtnDisable] = useState(false);
+  const [bookmarkBtnDisable, setBookmarkBtnDisable] = useState(false);
+
 
   const deletePostHandler = async (post) => {
     const response = await dispatch(deletePost({ post, token }));
@@ -54,6 +59,36 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
     setEditedPost(post);
     onOpen();
   };
+
+  const isPostLiked = post?.likes.likedBy.some(
+    (currentUser) => currentUser._id === user._id
+  );
+
+  const likeHandler = async (postId) => {
+  
+    isPostLiked
+      ? await dispatch(dislikePost({ postId, token, setLikeBtnDisable }))
+      : await dispatch(likePost({ postId, token, setLikeBtnDisable }));
+  };
+
+ 
+
+  const isPostBookmarked = bookmarks.some((currentPost) => currentPost === post._id);
+
+  const bookmarkHandler = async (postId) => {
+    isPostBookmarked
+      ? await dispatch(removeFromBookmark({ postId, token, setBookmarkBtnDisable }))
+      : await dispatch(addToBookmark({ postId, token, setBookmarkBtnDisable }));
+  };
+  
+  const getLikeUsers = () => {
+    if (post?.likes.likeCount === 1) {
+      return `Liked by ${post.likes.likedBy[0].username}`;
+    }
+    return `Liked by ${post.likes.likedBy[0].username} and ${
+      post.likes.likeCount - 1
+    } others`;
+  }
 
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
@@ -148,9 +183,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
       <Flex justifyContent="space-between" alignItems="center">
         <Flex alignItems="center">
           <IconButton
-            icon={<MdFavoriteBorder />}
+            icon={isPostLiked ? <FcLike /> : <MdFavoriteBorder />}
             bgColor="transparent"
-            color="black"
+            color={isPostLiked ? "red.400" : "black"}
             size="sm"
             fontSize="lg"
             borderRadius="50%"
@@ -165,12 +200,17 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
               bgColor: "red.100",
               borderColor: "transparent",
             }}
+
+            onClick ={()=> likeHandler(post._id)}
+            isLoading= {likeBtnDisbale}
           />
 
-          <Text>{post.likes.likeCount} likes</Text>
+{post.likes.likeCount > 0 ? (
+            <Text as="span">{getLikeUsers()}</Text>
+          ) : null}
         </Flex>
         <IconButton
-          icon={<MdOutlineBookmarkBorder />}
+          icon={isPostBookmarked ? <MdBookmark /> : <MdOutlineBookmarkBorder />}
           bgColor="transparent"
           color="black"
           size="sm"
@@ -187,6 +227,9 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
             bgColor: "red.100",
             borderColor: "transparent",
           }}
+
+          onClick = {()=> bookmarkHandler(post._id)}
+          isLoading = {bookmarkBtnDisable}
         />
       </Flex>
       {/* comment Input */}

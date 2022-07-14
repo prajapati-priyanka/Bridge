@@ -54,8 +54,9 @@ const MobileNav = ({onOpen})=>{
             <ListItem
                cursor= "pointer"
                fontSize="25px"
-               onClick={() => navigate(`/profile/${user.username}`)}
                color={`${pathname.includes("/profile") ? "brand.500" : "black"}`}
+               onClick={() => navigate(`/profile/${user.username}`)}
+               
             >
             <ListIcon as={AiOutlineUser} />
 

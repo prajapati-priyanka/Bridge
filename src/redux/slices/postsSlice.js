@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, createPost, editPost, deletePost } from "../asyncThunks/postsThunk";
+import { getAllPosts, createPost, editPost, deletePost, likePost, dislikePost } from "../asyncThunks/postsThunk";
 
 const initialState = {
     posts:[],
-    isLoading: false
+    isLoading: false,
+  
 }
 
 const postsSlice = createSlice({
@@ -59,6 +60,28 @@ const postsSlice = createSlice({
             state.posts = action.payload.data.posts;
           },
           [deletePost.rejected]: (state, action) => {
+            state.isLoading = false;
+            console.error(action.payload.data.errors[0]);
+          },
+          [likePost.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [likePost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.posts = action.payload.data.posts;
+          },
+          [likePost.rejected]: (state, action) => {
+            state.isLoading = false;
+            console.error(action.payload.data.errors[0]);
+          },
+          [dislikePost.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [dislikePost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.posts = action.payload.data.posts;
+          },
+          [dislikePost.rejected]: (state, action) => {
             state.isLoading = false;
             console.error(action.payload.data.errors[0]);
           },
