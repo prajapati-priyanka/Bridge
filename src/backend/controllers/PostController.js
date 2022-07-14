@@ -183,7 +183,7 @@ export const likePostHandler = function (schema, request) {
       (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push(user);
+    post.likes.likedBy.push(JSON.parse(JSON.stringify(user)));
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
