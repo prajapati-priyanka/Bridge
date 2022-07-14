@@ -8,4 +8,5 @@ export {Header} from "./Header";
 export {UserProfileCard} from "./UserProfileCard";
 export {MobileNav} from "./MobileNav";
 export {EditUserProfileModal} from "./EditUserProfileModal";
-export {EditCommentModal} from "./EditCommentModal"
+export {EditCommentModal} from "./EditCommentModal";
+export {Filters} from "./Filters";
