@@ -79,7 +79,7 @@ const UserProfile = () => {
               userPostsLength={userPosts?.length}
             />
             <Box w="100%">
-              <Heading as="h3" size="md">
+              <Heading as="h3" size="md" mb="4">
                 Your Posts
               </Heading>
 
@@ -101,8 +101,8 @@ const UserProfile = () => {
                   ))}
                 </Flex>
               ) : (
-                <Flex w="50rem" justifyContent="center" alignItems="center">
-                  <Heading as="h3" size="md" textAlign="center">
+                <Flex maxW="50rem" justifyContent="center" alignItems="center">
+                  <Heading as="h3" size="md" textAlign="center" mt="8">
                     No posts to display, start posting and following other users
                     to update your feed.
                   </Heading>
