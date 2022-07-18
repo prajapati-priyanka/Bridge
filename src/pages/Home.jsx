@@ -88,14 +88,25 @@ const Home = () => {
                     setFilterType={setFilterType}
                   />
 
-                  {[...userFeed].reverse().map((post) => (
-                    <PostCard
-                      key={post._id}
-                      post={post}
-                      onOpen={onOpen}
-                      setEditedPost={setEditedPost}
-                    />
-                  ))}
+                  {filterType === "noFilter"
+                    ? filteredPosts
+                        .reverse()
+                        .map((post) => (
+                          <PostCard
+                            key={post._id}
+                            post={post}
+                            onOpen={onOpen}
+                            setEditedPost={setEditedPost}
+                          />
+                        ))
+                    : filteredPosts.map((post) => (
+                        <PostCard
+                          key={post._id}
+                          post={post}
+                          onOpen={onOpen}
+                          setEditedPost={setEditedPost}
+                        />
+                      ))}
                 </Flex>
               ) : (
                 <Flex maxW="50rem" justifyContent="center" alignItems="center">
