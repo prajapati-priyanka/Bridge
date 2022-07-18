@@ -23,7 +23,7 @@ Bridge is a social media app where user can make new friends, and share their th
   - User can edit his Avatar, Bio and Website
 - Sort Posts
   - Sort posts by Trending
-  - Sort posts by newest as well as oldest added
+  - Sort posts by newest as well as oldest
 
 ---
 
