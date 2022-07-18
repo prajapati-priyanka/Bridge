@@ -1,4 +1,4 @@
-import { Flex, useDisclosure, Box, Heading } from "@chakra-ui/react";
+import { Flex, useDisclosure, Box, Heading, CircularProgress } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -27,6 +27,8 @@ const Explore = () => {
     }
   }, [dispatch, status]);
 
+
+
   const filteredPosts = filterPosts(posts, filterType);
 
   return (
@@ -39,8 +41,22 @@ const Explore = () => {
           setEditedPost={setEditedPost}
         />
       ) : null}
+      <Box h="100vh">
+      {status === "pending" ? (
+          <CircularProgress
+          isIndeterminate
+          color="brand.500"
+          position="fixed"
+          top="50%"
+          left="50%"
+          size="80px"
+          thickness="10px"
+        />
+      ) : null }
       <Header onOpen={onOpen} />
-      <Flex
+      {status === "resolved" ? (
+<>
+<Flex
         bg="var(--bg-color)"
         w="100%"
         gap="10"
@@ -84,6 +100,10 @@ const Explore = () => {
       >
         <MobileNav onOpen={onOpen} />
       </Box>
+</>
+      ) : null} 
+      </Box>
+     
     </>
   );
 };
