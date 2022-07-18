@@ -19,7 +19,7 @@ const Header = ({onOpen})=>{
       
       );
       setSearchedUsers(foundUsers)
-    }, 1000)
+    }, 500)
   }, [searchQuery, users])
 
     return(
