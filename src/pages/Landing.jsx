@@ -8,6 +8,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { landingImage } from "../assets";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Landing = () => {
         </Link>
       </Box>
       <Box w={{ md: "30%", sm: "70%" }}>
-        <Image src="./assets/landingImage.svg" alt="landing" w="100%" />
+        <Image src={landingImage} alt="landing" w="100%" />
       </Box>
     </Flex>
   );
