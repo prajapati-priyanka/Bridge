@@ -8,6 +8,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { landingImage } from "../assets";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -30,21 +31,29 @@ const Landing = () => {
         <Flex gap="3">
           <Button
             variant="outline"
-            width={{base:"50%", md: "30%"}}
+            width={{ base: "50%", md: "30%" }}
             onClick={() => navigate("/signup")}
           >
             SignUp
           </Button>
-          <Button variant="solid" width={{base:"50%", md: "30%"}} onClick={() => navigate("/home")}>
+          <Button
+            variant="solid"
+            width={{ base: "50%", md: "30%" }}
+            onClick={() => navigate("/home")}
+          >
             Get Started
           </Button>
         </Flex>
-        <Link width={{base:"100%", md: "50%"}}  fontWeight="500" onClick={() => navigate("/login")}>
+        <Link
+          width={{ base: "100%", md: "50%" }}
+          fontWeight="500"
+          onClick={() => navigate("/login")}
+        >
           Already have an account?
         </Link>
       </Box>
       <Box w={{ md: "30%", sm: "70%" }}>
-        <Image src="./assets/landingImage.svg" alt="landing" w="100%" />
+        <Image src={landingImage} alt="landing" w="100%" />
       </Box>
     </Flex>
   );

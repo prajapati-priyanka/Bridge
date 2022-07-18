@@ -290,8 +290,37 @@ export const posts = [
     username: "deynupur",
     avatarUrl:
       "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021384/social-media/nupur.jpg",
-    createdAt: new Date("May 31 2022 4:04:29"),
+    createdAt: new Date("July 07 2022 4:04:29"),
     updatedAt: formatDate(),
     comments: [],
+  },
+
+  {
+    _id: uuid(),
+    content: "Life is too short to nag about things. Live each day as if it is your last day.",
+    likes: {
+      likeCount: 1,
+      likedBy: [
+       
+        {
+          _id: "5e24f83a",
+          firstName: "Sakshi",
+          lastName: "Kakkar",
+          username: "sakshi909",
+          avatarUrl:
+            "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021278/social-media/sakshi.jpg",
+        },
+      ],
+      dislikedBy:[]
+    },
+    username: "pihu909",
+    firstName: "Priyanka",
+    lastName: "Prajapati",
+    createdAt: new Date("July 15 2022 14:04:29"),
+    updatedAt: formatDate(),
+    avatarUrl:
+      "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
+    comments: [],
+    
   },
 ];

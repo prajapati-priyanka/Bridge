@@ -90,6 +90,12 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
     } others`;
   }
 
+  const getPostDate = (date) => {
+    let postDate = new Date(date);
+    postDate = postDate.toDateString().split(" ").slice(1, 4).join(" ");
+    return postDate.slice(0, 6) + "," + postDate.slice(6);
+  };
+
   return (
     <Flex flexDirection="column" gap="2" bg="white" p="4" borderRadius="20">
       {/* Avatar and name */}
@@ -106,12 +112,18 @@ const PostCard = ({ post, onOpen, setEditedPost }) => {
               post.username === user.username ? user.avatarUrl : post.avatarUrl
             }
           />
+          <Flex >
           <Heading as="h4" size="sm">
             {post.firstName} {post.lastName}
-            <Text fontSize="12px" color="gray.400" fontWeight="400" mt="1">
+            <Text fontSize="13px" color="gray.500" fontWeight="500" mt="1">
               @{post.username}
             </Text>
+            
           </Heading>
+          <Text as="span" fontSize="13px" ml="2" color="gray.600" fontWeight="700">
+              {getPostDate(post.createdAt)}
+            </Text>
+            </Flex>
         </Flex>
         {user.username === post.username ? (
           <Popover>
