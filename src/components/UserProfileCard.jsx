@@ -44,12 +44,13 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
 
 
   return (
-    <Flex flexDirection="column" maxW={{base:"70rem", lg:"50rem"}} alignItems="center" mb="8">
+    <Flex flexDirection="column" maxW={{base:"100%", lg:"50rem"}} alignItems="center" textAlign="center" mb="8">
       <Avatar
         name={userProfile?.firstName + " " + userProfile?.lastName}
         src={userProfile?.avatarUrl}
         size="2xl"
       />
+  
       <Heading as="h5" size="md" mt="1">
         {userProfile?.firstName}  {userProfile?.lastName}
       </Heading>
@@ -94,7 +95,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
       >
         {userProfile?.website}
       </Link>
-
+      
       <Flex
         gap="4"
         bg="brand.100"
