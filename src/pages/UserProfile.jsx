@@ -10,6 +10,7 @@ import {
   CreatePostModal,
   MobileNav,
   EditUserProfileModal,
+  FollowersModal,
 } from "../components";
 import { getSingleUser, getUserPosts } from "../services";
 import { useSelector } from "react-redux";
@@ -22,12 +23,19 @@ const UserProfile = () => {
     onClose: onCloseProfile,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenFollower,
+    onOpen: onOpenFollower,
+    onClose: onCloseFollower,
+  } = useDisclosure();
+
   const { username } = useParams();
   const { posts } = useSelector((state) => state.posts);
   const { users } = useSelector((state) => state.users);
   const [userProfile, setUserProfile] = useState(null);
   const [userPosts, setUserPosts] = useState(null);
   const [editedPost, setEditedPost] = useState(null);
+  const [followModal, setFollowModal] = useState(null);
 
   useEffect(() => {
     getSingleUser(setUserProfile, username);
@@ -45,14 +53,22 @@ const UserProfile = () => {
         />
       ) : null}
 
-      {userProfile && (
+      {isOpenProfile ? (
         <EditUserProfileModal
           isOpenProfile={isOpenProfile}
           onCloseProfile={onCloseProfile}
           userProfile={userProfile}
           setUserProfile={setUserProfile}
         />
-      )}
+      ) : null}
+
+      {isOpenFollower ? (
+        <FollowersModal
+          isOpenFollower={isOpenFollower}
+          onCloseFollower={onCloseFollower}
+          followModal={followModal}
+        />
+      ) : null}
 
       <Header onOpen={onOpen} />
       <Box>
@@ -77,6 +93,8 @@ const UserProfile = () => {
               onOpenProfile={onOpenProfile}
               userProfile={userProfile}
               userPostsLength={userPosts?.length}
+              onOpenFollower={onOpenFollower}
+              setFollowModal={setFollowModal}
             />
             <Box w="100%">
               <Heading as="h3" size="md" mb="4">
@@ -96,7 +114,7 @@ const UserProfile = () => {
                       key={post._id}
                       post={post}
                       setEditedPost={setEditedPost}
-                      onOpen = {onOpen}
+                      onOpen={onOpen}
                     />
                   ))}
                 </Flex>

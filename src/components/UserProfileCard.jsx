@@ -12,10 +12,16 @@ import {
 import { AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { followUser,unfollowUser } from "../redux/asyncThunks";
+import { followUser, unfollowUser } from "../redux/asyncThunks";
 import { logoutUser, updateUser } from "../redux/slices";
 
-const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
+const UserProfileCard = ({
+  onOpenProfile,
+  userProfile,
+  userPostsLength,
+  onOpenFollower,
+  setFollowModal,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
@@ -37,22 +43,32 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
     dispatch(updateUser(response?.payload.data.user));
   };
 
-  const unfollowUserHandler = async (followUserId) =>{
-    const response = await dispatch(unfollowUser({followUserId, token}));
-    dispatch(updateUser(response?.payload.data.user))
-  }
+  const unfollowUserHandler = async (followUserId) => {
+    const response = await dispatch(unfollowUser({ followUserId, token }));
+    dispatch(updateUser(response?.payload.data.user));
+  };
 
+  const followerModalHandler = (type) => {
+    setFollowModal(type);
+    onOpenFollower();
+  };
 
   return (
-    <Flex flexDirection="column" maxW={{base:"100%", lg:"50rem"}} alignItems="center" textAlign="center" mb="8">
+    <Flex
+      flexDirection="column"
+      maxW={{ base: "100%", lg: "50rem" }}
+      alignItems="center"
+      textAlign="center"
+      mb="8"
+    >
       <Avatar
         name={userProfile?.firstName + " " + userProfile?.lastName}
         src={userProfile?.avatarUrl}
         size="2xl"
       />
-  
+
       <Heading as="h5" size="md" mt="1">
-        {userProfile?.firstName}  {userProfile?.lastName}
+        {userProfile?.firstName} {userProfile?.lastName}
       </Heading>
       <Text>@{userProfile?.username}</Text>
       {userProfile?.username === user.username ? (
@@ -79,11 +95,17 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
       ) : user.following.some(
           (item) => item.username === userProfile?.username
         ) ? (
-        <Button variant="outline" my="2" onClick={() => unfollowUserHandler(userProfile._id)}>
+        <Button
+          variant="outline"
+          my="2"
+          onClick={() => unfollowUserHandler(userProfile._id)}
+        >
           Unfollow
         </Button>
       ) : (
-        <Button my="2" onClick={() => followUserHandler(userProfile._id)}>Follow</Button>
+        <Button my="2" onClick={() => followUserHandler(userProfile._id)}>
+          Follow
+        </Button>
       )}
 
       <Text>{userProfile?.bio}</Text>
@@ -95,7 +117,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
       >
         {userProfile?.website}
       </Link>
-      
+
       <Flex
         gap="4"
         bg="brand.100"
@@ -104,7 +126,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
         borderRadius="8"
         mt="4"
       >
-        <Box cursor="pointer">
+        <Box cursor="pointer" onClick={() => followerModalHandler("Following")}>
           <Heading as="h5" size="md" textAlign="center">
             {userProfile?.following?.length}
           </Heading>
@@ -116,7 +138,7 @@ const UserProfileCard = ({ onOpenProfile, userProfile, userPostsLength }) => {
           </Heading>
           <Text>Posts</Text>
         </Box>
-        <Box cursor="pointer">
+        <Box cursor="pointer" onClick={() => followerModalHandler("Followers")}>
           <Heading as="h5" size="md" textAlign="center">
             {userProfile?.followers?.length}
           </Heading>
