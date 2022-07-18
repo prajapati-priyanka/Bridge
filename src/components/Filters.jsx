@@ -14,23 +14,25 @@ const Filters = ({ filterType, setFilterType }) => {
       <Box
         w="52%"
         textAlign="center"
-        borderRight="4px solid #ECC94B"
-        bgColor={filterType === "trending" ? "brand.500" : " gray.200"}
+        borderRight="4px solid gray"
+        bgColor={filterType === "trending" ? "brand.500" : "gray.200"}
       >
         <Button
           leftIcon={<AiTwotoneFire />}
           variant="ghost"
           w="100%"
           fontSize="xl"
-          color={filterType === "trending" ? "gray.200" : "brand.500"}
+          color={filterType === "trending" ? "black" : "brand.500"}
           _hover={{
             bgColor: "transparent",
           }}
           _active={{
             bgColor: "transparent",
+    
           }}
           _focus={{
             bgColor: "transparent",
+           
           }}
           onClick={() =>
             filterType === "trending"
@@ -58,7 +60,7 @@ const Filters = ({ filterType, setFilterType }) => {
           onChange={(e) => setFilterType(e.target.value)}
           color={
             filterType === "oldestByDate" || filterType === "newestByDate"
-              ? "gray.200"
+              ? "black"
               : "brand.500"
           }
           _hover={{
