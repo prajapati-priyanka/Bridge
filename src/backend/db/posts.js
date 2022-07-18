@@ -316,7 +316,7 @@ export const posts = [
     username: "pihu909",
     firstName: "Priyanka",
     lastName: "Prajapati",
-    createdAt: new Date("June 01 2022 14:04:29"),
+    createdAt: new Date("July 15 2022 14:04:29"),
     updatedAt: formatDate(),
     avatarUrl:
       "https://res.cloudinary.com/prajapati-priyanka/image/upload/v1657021458/social-media/priyanka.jpg",
