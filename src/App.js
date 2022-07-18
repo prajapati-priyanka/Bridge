@@ -1,6 +1,6 @@
 import {Routes, Route } from "react-router-dom";
 import "./App.css";
-import {Bookmark, Home, Landing, UserProfile,Login, Signup, Explore } from "./pages";
+import {Bookmark, Home, Landing, UserProfile,Login, Signup, Explore, Error404 } from "./pages";
 import { RequiresAuth } from "./Router/RequiresAuth";
 
 
@@ -15,6 +15,7 @@ function App() {
         <Route path="/explore" element={<RequiresAuth><Explore /></RequiresAuth>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     
     </div>
