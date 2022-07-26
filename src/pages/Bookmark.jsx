@@ -89,7 +89,7 @@ const Bookmark = () => {
                 ))}
               </Flex>
             ) : (
-              <Flex maxW="50rem" justifyContent="center" alignItems="center">
+              <Flex w="100%" maxW="50rem" justifyContent="center" alignItems="center">
                 <Heading as="h3" size="md" textAlign="center">
                   No posts to display, Nothing has been bookmarked
                 </Heading>
